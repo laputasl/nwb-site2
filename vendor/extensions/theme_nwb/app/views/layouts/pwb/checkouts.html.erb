@@ -25,7 +25,14 @@
   </div>
   <%= render 'shared/google_analytics' %>
   <%= render 'shared/ppc' %>
+  <%= render 'shared/boldchat_visitor_tracking', :locals => {
+    :page_viewer            => "2298068183499916261", 
+    :website_definition     => "1885118237688256958",
+    :chat_window_definition => "6494358942194240032",
+    :invitation_definition  => "852533431736526015"     
+  } %>  
   <%= render 'shared/pwb_fetch_back' %>
+
 </body>
 </html>
 
