@@ -42,9 +42,6 @@ class SiteExtension < Spree::Extension
       def add_variant_only
         begin
           order = find_cart
-          logger.info "*" * 78
-          logger.info params["variants"].inspect
-          logger.info "*" * 78
           variants = params[:variants].map{|variant_id, quant|[Variant.find(variant_id), quant.to_i]}.each do |item|
             order.add_variant item[0], item[1]
           end
