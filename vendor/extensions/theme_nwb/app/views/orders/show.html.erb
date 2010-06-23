@@ -1,11 +1,10 @@
 <div id="order">
   
   <% if params.has_key? :checkout_complete %>
-  <!-- gwo conversion -->
-  <% gwo_tests = GwoTest.find(:all, :conditions => ["status=? AND category=?", "enabled", "MV"]) %>
-  <% gwo_tests.each do |gwo_test| %>
-    <%= render :partial => 'shared/gwo/nwb_conversion', :locals => {:eid => "#{gwo_test.eid}", :pid => "#{gwo_test.pid}"} %>
-  <% end %>
+  <%= render :partial => 'shared/gwo/conversion', :locals => {:eid => "#{Spree::Config.get(:nwb_global_test_eid)}", :pid => "#{Spree::Config.get(:nwb_global_test_pid)}"} %>
+  <%= render :partial => 'shared/gwo/conversion', :locals => {:eid => "#{Spree::Config.get(:pwb_global_test_eid)}", :pid => "#{Spree::Config.get(:pwb_global_test_pid)}"} %>
+  <%= render :partial => 'shared/gwo/conversion', :locals => {:eid => "2523059858", :pid => "UA-16618505-1"} %>
+  <%= render :partial => 'shared/gwo/conversion', :locals => {:eid => "3808723163", :pid => "UA-16618505-1"} %>
     <br/><br/>
     <div id="cart-footer">
       <h2><strong>Thank You</strong></h2><br/>

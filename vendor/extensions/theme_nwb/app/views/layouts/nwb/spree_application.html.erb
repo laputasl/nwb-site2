@@ -4,21 +4,8 @@
 <%= render :partial => 'shared/head'%>
 </head>
   
-<!-- gwo control -->
-<% gwo_test = GwoTest.find_by_name("NWB Product Headline Color Test MV") %>
-<% if ((not gwo_test.nil?) && gwo_test.status == "enabled") %>
-    <%= render :partial => 'shared/gwo/nwb_control', :locals => {:eid => "#{gwo_test.eid}"} %>
-<% end %>
-
-<% if ((not gwo_test.nil?) && gwo_test.status == "enabled") %>
-  <script>utmx_section('body_tag')</script>
-<% end %>
-
+<%= render :partial => 'shared/gwo/control', :locals => {:eid => "#{Spree::Config.get(:nwb_global_test_eid)}"} %>
 <body>
-<% if ((not gwo_test.nil?) && gwo_test.status == "enabled") %>
-  <%= render :text=>"</noscript>" %>
-<% end %>
-
   <div id="container">
     <%= render "/shared/nwb_navigation" %>
     <div id="main">
@@ -41,28 +28,12 @@
   <%= render 'shared/ppc' %>
   <%= render 'shared/nwb_fetch_back' %>
 </body>
-<script type="text/javascript">
-  /*
-    if(document.body.className=='gwo_dog_banner_test_var_1'){
-      document.getElementById("dog_banner").src="/pwb/images/banner-dog-supplies-free-shipping.jpg";
-    }
-    if(document.body.className=='gwo_dog_banner_test_var_2'){
-      document.getElementById("dog_banner").style.display="none";
-    }
-    if(document.body.className=='gwo_cat_banner_test_var_1'){
-      document.getElementById("cat_banner").src="/pwb/images/banner-cat-supplies-free-shipping.jpg";
-    }
-    if(document.body.className=='gwo_cat_banner_test_var_2'){
-      document.getElementById("cat_banner").style.display="none";
-    }
-   */
-  //document.body.style.backgroundImage="url(images/2.jpg)";
-  //document.getElementById("container").style.backgroundColor="white";
-</script>
-<!-- gwo tracking -->
-<% gwo_tests = GwoTest.find(:all, :conditions => ["status=? AND category=?", "enabled", "MV"]) %>
-<% gwo_tests.each do |gwo_test| %>
-  <%= render :partial => 'shared/gwo/nwb_tracking', :locals => {:eid => "#{gwo_test.eid}", :pid => "#{gwo_test.pid}"} %>
+
+<% (1..Spree::Config[:nwb_global_test_js_count].to_i).each do |i| %>
+  <script>utmx_section('global_test_js_<%= i.to_s %>')</script>
+  <%= render :text=>"</noscript>" %>
 <% end %>
+
+<%= render :partial => 'shared/gwo/tracking', :locals => {:eid => "#{Spree::Config.get(:nwb_global_test_eid)}", :pid => "#{Spree::Config.get(:nwb_global_test_pid)}"} %>
 </html>
 

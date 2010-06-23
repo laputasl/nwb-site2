@@ -3,6 +3,7 @@
 <head>
 <%= render :partial => 'shared/head'%>
 </head>
+<%= render :partial => 'shared/gwo/control', :locals => {:eid => "#{Spree::Config.get(:pwb_global_test_eid)}"} %>
 <body>
   <div id="container">
     <%= render "/shared/pwb_navigation" %>
@@ -27,5 +28,14 @@
   <%= render 'shared/ppc' %>
   <%= render 'shared/pwb_fetch_back' %>
 </body>
+
+<% (1..Spree::Config[:pwb_global_test_js_count].to_i).each do |i| %>
+  <script>utmx_section('global_test_js_<%= i.to_s %>')</script>
+  <%= render :text=>"</noscript>" %>
+<% end %>
+
+<%= render :partial => 'shared/gwo/tracking', :locals => {:eid => "#{Spree::Config.get(:pwb_global_test_eid)}", :pid => "#{Spree::Config.get(:pwb_global_test_pid)}"} %>
+<%= render :partial => 'shared/gwo/tracking', :locals => {:eid => "3808723163", :pid => "UA-16618505-1"} %>
+<%= render :partial => 'shared/gwo/tracking', :locals => {:eid => "2523059858", :pid => "UA-16618505-1"} %>
 </html>
 
