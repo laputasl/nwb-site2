@@ -1,0 +1,18 @@
+<!-- Bold Software Visitor Monitor HTML v2.00 (Website=PetWellbeing.com,ChatWindow=PWB Chat Window,ChatInvitation=Checkout Help) -->
+<%=javascript_include_tag "https://vms.boldchat.com/aid/#{page_viewer}/bc.vms2/vms.js"%>
+<script language="JavaScript" type="text/javascript">
+try {
+ var pageViewer = _bcvm.getPageViewer("<%= page_viewer%>");
+ pageViewer.setParameter("WebsiteDefID", "<%= website_definition%>");
+ pageViewer.setParameter("ChatWindowDefID", "<%= chat_window_definition%>");
+ pageViewer.setParameter("ChatWidth", "640");
+ pageViewer.setParameter("ChatHeight", "480");
+ pageViewer.setParameter("InvitationDefID", "<%= invitation_definition%>");
+ pageViewer.setParameter("WindowScheme", "https");
+ pageViewer.pageViewed();
+} catch(error) {}
+</script>
+<noscript>
+<a href="http://www.boldsoft.com" title="Live Support" target="_blank"><img alt="Live Support" src="https://vms.boldchat.com/aid/<%= page_viewer%>/bc.vmi?wdid=<%= website_definition%>" border="0" width="1" height="1" /></a>
+</noscript>
+<!-- /Bold Software Visitor Monitor HTML v2.00 -->

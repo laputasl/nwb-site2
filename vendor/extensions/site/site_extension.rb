@@ -37,25 +37,34 @@ class SiteExtension < Spree::Extension
 
     OrdersController.class_eval do
       skip_before_filter :verify_authenticity_token, :only => [:add_variant_only]
-      
+
+
       def add_variant_only
-        # We're going to find the Variants then add them to the cart in 
-        # two steps so that if an invalid variant ID is used, we don't 
-        # have to undo previously added variants.        
         begin
-          order = find_order
-          logger.info "*" * 78
-          logger.info params["variants"].inspect
-          logger.info "*" * 78
+          order = find_cart
           variants = params[:variants].map{|variant_id, quant|[Variant.find(variant_id), quant.to_i]}.each do |item|
             order.add_variant item[0], item[1]
           end
           redirect_to edit_order_url(@order)
         rescue ActiveRecord::RecordNotFound => rnf
           flash[:error] = "Product does not exist"
-          render :template => "orders/edit" 
+          render :template => "orders/edit"
         end
       end
+      
+      private
+      # This is a verison of find_order that handles this situation better... I hope
+      def find_cart
+        if !session[:order_id].blank?
+          @order = Order.find_or_create_by_id(session[:order_id])
+        else
+          @order = Order.create(:user => current_user)
+        end
+        session[:order_id]    = @order.id
+        session[:order_token] = @order.token
+        @order
+      end
+      
     end
 
     ProductsController.class_eval do
