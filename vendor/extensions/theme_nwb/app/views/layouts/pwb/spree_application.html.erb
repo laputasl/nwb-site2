@@ -3,7 +3,7 @@
 <head>
 <%= render :partial => 'shared/head'%>
 </head>
-<%= render :partial => 'shared/gwo/control', :locals => {:eid => "#{Spree::Config.get(:pwb_global_test_eid)}"} %>
+<%= render :partial => 'shared/gwo/control', :locals => {:eid => "#{Spree::Config[:pwb_global_test_eid]}"} %>
 <body>
   <div id="container">
     <%= render "/shared/pwb_navigation" %>
@@ -34,9 +34,8 @@
   <%= render :text=>"</noscript>" %>
 <% end %>
 
-<%= render :partial => 'shared/gwo/tracking', :locals => {:eid => "#{Spree::Config.get(:pwb_global_test_eid)}", :pid => "#{Spree::Config.get(:pwb_global_test_pid)}"} %>
+<%= render :partial => 'shared/gwo/tracking', :locals => {:eid => "#{Spree::Config[:pwb_global_test_eid]}", :pid => "#{Spree::Config[:pwb_global_test_pid]}"} %>
 <%= render :partial => 'shared/gwo/tracking', :locals => {:eid => "2021971787", :pid => "UA-981819-14"} %>
 <%= render :partial => 'shared/gwo/tracking', :locals => {:eid => "3819126798", :pid => "UA-981819-14"} %>
-
 </html>
 
