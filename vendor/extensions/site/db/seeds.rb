@@ -73,11 +73,3 @@ Spree::Config.set(:pwb_homepage_description => "Pet Wellbeing provides natural p
 Spree::Config.set(:nwb_homepage_description => "Offers permanent hair removal products, hair growth, and hair loss treatments for female and male pattern baldness. Also sells low libido and sex drive enhancers and other herbal supplements.")
 
 Spree::Config.set(:allow_anonymous_checkout => true) #needed to prevent log-out on recalculate on payment step for guests
-
-#variables for gwo test
-Spree::Config.set(:nwb_global_test_eid => "")
-Spree::Config.set(:nwb_global_test_pid => "")
-Spree::Config.set(:nwb_global_test_js_count => 1)
-Spree::Config.set(:pwb_global_test_eid => "")
-Spree::Config.set(:pwb_global_test_pid => "")
-Spree::Config.set(:pwb_global_test_js_count => 1)

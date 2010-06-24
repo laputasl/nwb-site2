@@ -1,17 +1,7 @@
 <% if @site.code == "pwb" %>
   <% if @taxon.id == 3001 || @taxon.ancestors.any? {|t| t.id == 3001 } %>
-
-    <%= render :partial => 'shared/gwo/control', :locals => {:eid => "2021971787"} %>
-    <script>utmx_section('dog_banner')</script>
-    <%= image_tag "/pwb/images/banner-dog-supplies.jpg", :alt => "PetWellbeing.com : Dog Supplies", :id=>"dog_banner" %>
-    <%= render :text=>"</noscript>" %>
-    
+    <%= image_tag "/pwb/images/banner-dog-supplies.jpg", :alt => "PetWellbeing.com : Dog Supplies", :id=>"dog_banner" %>    
   <% elsif @taxon.id == 3002 || @taxon.ancestors.any? {|t| t.id == 3002 } %>
-    
-    <%= render :partial => 'shared/gwo/control', :locals => {:eid => "3819126798"} %>
-    <script>utmx_section('cat_banner')</script>
     <%= image_tag "/pwb/images/banner-cat-supplies.jpg", :alt => "PetWellbeing.com : Cat Supplies", :id=>"cat_banner" %>
-    <%= render :text=>"</noscript>" %>
-
   <% end %>
 <% end %>

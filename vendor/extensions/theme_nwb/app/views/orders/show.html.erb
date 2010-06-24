@@ -1,10 +1,8 @@
 <div id="order">
   
   <% if params.has_key? :checkout_complete %>
-  <%= render :partial => 'shared/gwo/conversion', :locals => {:eid => "#{Spree::Config[:nwb_global_test_eid]}", :pid => "#{Spree::Config[:nwb_global_test_pid]}"} %>
-  <%= render :partial => 'shared/gwo/conversion', :locals => {:eid => "#{Spree::Config[:pwb_global_test_eid]}", :pid => "#{Spree::Config[:pwb_global_test_pid]}"} %>
-  <%= render :partial => 'shared/gwo/conversion', :locals => {:eid => "2021971787", :pid => "UA-981819-14"} %>
-  <%= render :partial => 'shared/gwo/conversion', :locals => {:eid => "3819126798", :pid => "UA-981819-14"} %>
+  <%= render :partial => 'shared/gwo/conversion', :locals => {:eid => NWB_GLOBAL_TEST_EID, :pid => NWB_GLOBAL_TEST_PID, :domain_name => NWB_DOMAIN_NAME} %>
+  <%= render :partial => 'shared/gwo/conversion', :locals => {:eid => PWB_GLOBAL_TEST_EID, :pid => PWB_GLOBAL_TEST_PID, :domain_name => PWB_DOMAIN_NAME} %>
     <br/><br/>
     <div id="cart-footer">
       <h2><strong>Thank You</strong></h2><br/>

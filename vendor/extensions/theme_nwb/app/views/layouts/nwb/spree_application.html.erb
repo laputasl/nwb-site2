@@ -4,7 +4,7 @@
 <%= render :partial => 'shared/head'%>
 </head>
   
-<%= render :partial => 'shared/gwo/control', :locals => {:eid => "#{Spree::Config[:nwb_global_test_eid]}"} %>
+<%= render :partial => 'shared/gwo/control', :locals => {:eid => NWB_GLOBAL_TEST_EID, :domain_name => NWB_DOMAIN_NAME} %>
 <body>
   <div id="container">
     <%= render "/shared/nwb_navigation" %>
@@ -29,11 +29,11 @@
   <%= render 'shared/nwb_fetch_back' %>
 </body>
 
-<% (1..Spree::Config[:nwb_global_test_js_count].to_i).each do |i| %>
+<% (1..NWB_GLOBAL_TEST_JS_COUNT.to_i).each do |i| %>
   <script>utmx_section('global_test_js_<%= i.to_s %>')</script>
   <%= render :text=>"</noscript>" %>
 <% end %>
 
-<%= render :partial => 'shared/gwo/tracking', :locals => {:eid => "#{Spree::Config[:nwb_global_test_eid]}", :pid => "#{Spree::Config[:nwb_global_test_pid]}"} %>
+<%= render :partial => 'shared/gwo/tracking', :locals => {:eid => NWB_GLOBAL_TEST_EID, :pid => NWB_GLOBAL_TEST_PID, :domain_name => NWB_DOMAIN_NAME} %>
 </html>
 

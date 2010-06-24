@@ -6,7 +6,7 @@ if(typeof(_gat)!='object')document.write('<sc'+'ript src="http'+
 <script type="text/javascript">
 try {
 var gwoTracker=_gat._getTracker("<%= pid %>");
-gwoTracker._setDomainName(".naturalwellbeing.com");
+gwoTracker._setDomainName("<%= domain_name %>");
 gwoTracker._setAllowHash(false);
 gwoTracker._setAllowLinker(true);
 gwoTracker._trackPageview("/<%= eid %>/goal");

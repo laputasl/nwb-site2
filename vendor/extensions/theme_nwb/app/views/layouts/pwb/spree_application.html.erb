@@ -3,7 +3,7 @@
 <head>
 <%= render :partial => 'shared/head'%>
 </head>
-<%= render :partial => 'shared/gwo/control', :locals => {:eid => "#{Spree::Config[:pwb_global_test_eid]}"} %>
+<%= render :partial => 'shared/gwo/control', :locals => {:eid => PWB_GLOBAL_TEST_EID, :domain_name => PWB_DOMAIN_NAME} %>
 <body>
   <div id="container">
     <%= render "/shared/pwb_navigation" %>
@@ -29,13 +29,11 @@
   <%= render 'shared/pwb_fetch_back' %>
 </body>
 
-<% (1..Spree::Config[:pwb_global_test_js_count].to_i).each do |i| %>
+<% (1..PWB_GLOBAL_TEST_JS_COUNT.to_i).each do |i| %>
   <script>utmx_section('global_test_js_<%= i.to_s %>')</script>
   <%= render :text=>"</noscript>" %>
 <% end %>
 
-<%= render :partial => 'shared/gwo/tracking', :locals => {:eid => "#{Spree::Config[:pwb_global_test_eid]}", :pid => "#{Spree::Config[:pwb_global_test_pid]}"} %>
-<%= render :partial => 'shared/gwo/tracking', :locals => {:eid => "2021971787", :pid => "UA-981819-14"} %>
-<%= render :partial => 'shared/gwo/tracking', :locals => {:eid => "3819126798", :pid => "UA-981819-14"} %>
+<%= render :partial => 'shared/gwo/tracking', :locals => {:eid => PWB_GLOBAL_TEST_EID, :pid => PWB_GLOBAL_TEST_PID, :domain_name => PWB_DOMAIN_NAME} %>
 </html>
 
