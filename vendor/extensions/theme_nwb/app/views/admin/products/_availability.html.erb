@@ -1,0 +1,7 @@
+<p>
+  <%= f.label :stock_availability, t("stock_availability.label")%><br />
+  <%= f.radio_button(:stock_availability, "in_stock") %>
+  <%= f.label :stock_availability_in_stock, t("stock_availability.in_stock"), :class=>'value'%><br />
+  <%= f.radio_button(:stock_availability, "out_of_stock") %>
+  <%= f.label :stock_availability_out_of_stock, t("stock_availability.out_of_stock"), :class=>'value'%><br />
+</p>
