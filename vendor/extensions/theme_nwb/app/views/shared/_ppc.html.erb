@@ -1,5 +1,6 @@
 <%
-key = (@current_domain == "pwb")? :pwb_click_equations_key : :nwb_click_equations_key
+prefix = (@current_domain == "nwb") ? "nwb" : "pwb"
+key = "#{prefix}_click_equations_key".to_sym
 scheme = (request.ssl?) ? "https://" : "http://"
 %><%=javascript_include_tag "#{scheme}js.clickequations.net/CLEQ_#{Spree::Config[key]}.js"%><% 
 if flash[:commerce_tracking] 
@@ -19,5 +20,15 @@ if flash[:commerce_tracking]
   CQtracker.log_CLEQ_conversion();
   <% 
   end
-end  -%>
- 
+  render :partial=> "shared/ppc_google_remarketing", :locals => {
+    :conversion_label => Spree::Config["#{prefix}_conversion_level"],
+    :conversion_id    => Spree::Config["#{prefix}_conversion_id"],
+    :scheme           => scheme
+    }
+else
+  render :partial=> "shared/ppc_google_remarketing", :locals => {
+    :conversion_label => Spree::Config["#{prefix}_tracking_level"],
+    :conversion_id    => Spree::Config["#{prefix}_tracking_id"],
+    :scheme           => scheme
+    }
+end  -%> 
