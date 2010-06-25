@@ -31,6 +31,10 @@
 
 <% (1..PWB_GLOBAL_TEST_JS_COUNT.to_i).each do |i| %>
   <script>utmx_section('global_test_js_<%= i.to_s %>')</script>
+  <script>
+    $('#dog_banner').css('display','');
+    $('#cat_banner').css('display','');
+  </script>
   <%= render :text=>"</noscript>" %>
 <% end %>
 
