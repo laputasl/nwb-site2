@@ -19,7 +19,8 @@
     <g:image_link><%=product_image_url(prod)%></g:image_link> 
     <g:id><%=prod.powerreviews_page_id%></g:id>
     <g:price><%= number_to_currency(prod.master.volume_price(1).to_s) %></g:price>
-    <g:quantity><%= (prod.count_on_hand>0)?100:0%></g:quantity>
+    <g:quantity><%= (@product.stock_availability == 'in_stock')?100:0%></g:quantity>
   </entry>
   <%end%>
 </feed>
+
