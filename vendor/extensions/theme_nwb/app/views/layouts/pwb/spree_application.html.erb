@@ -4,7 +4,11 @@
 <%= render :partial => 'shared/head'%>
 </head>
 <%= render :partial => 'shared/gwo/control', :locals => {:eid => PWB_GLOBAL_TEST_EID, :domain_name => PWB_DOMAIN_NAME} %>
+
+<script>utmx_section('body_tag')</script>
 <body>
+<%= render :text=>"</noscript>" %>
+  
   <div id="container">
     <%= render "/shared/pwb_navigation" %>
     <hr />
@@ -31,10 +35,6 @@
 
 <% (1..PWB_GLOBAL_TEST_JS_COUNT.to_i).each do |i| %>
   <script>utmx_section('global_test_js_<%= i.to_s %>')</script>
-  <script>
-    $('#dog_banner').css('display','');
-    $('#cat_banner').css('display','');
-  </script>
   <%= render :text=>"</noscript>" %>
 <% end %>
 

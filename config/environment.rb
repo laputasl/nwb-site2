@@ -102,14 +102,14 @@ Time::DATE_FORMATS[:short_date] = "%Y-%m-%d"
 # Include your application configuration below
 
 # global variables for gwo test
-NWB_GLOBAL_TEST_EID = ""
-NWB_GLOBAL_TEST_PID = ""
+NWB_GLOBAL_TEST_EID = "3063478576" # local background
+NWB_GLOBAL_TEST_PID = "UA-16618505-1"
 NWB_GLOBAL_TEST_JS_COUNT = 1
 NWB_DOMAIN_NAME = ".naturalwellbeing.com"
 
-PWB_GLOBAL_TEST_EID = "0640388639"
+PWB_GLOBAL_TEST_EID = "0640388639" # local banners
 PWB_GLOBAL_TEST_PID = "UA-16618505-1"
-#PWB_GLOBAL_TEST_EID = "3906587456"
+#PWB_GLOBAL_TEST_EID = "3906587456"  # staging banners
 #PWB_GLOBAL_TEST_PID = "UA-981819-14"
 PWB_GLOBAL_TEST_JS_COUNT = 1
 PWB_DOMAIN_NAME = ".petwellbeing.com"
