@@ -1,8 +1,16 @@
+/* Product Headline Color Test */
 .gwo_color_test_var_1 .product h2 { color: #0000ff; }
 .gwo_color_test_var_2 .product h2 { color: #00008b; }
 .gwo_color_test_var_3 .product h2 { color: #0000cd; }
 .gwo_color_test_var_4 .product h2 { color: #000080; }
 .gwo_color_test_var_5 .product h2 { color: #4169e1; }
 
+/* Banners test */
 .original_banner { display: block; }
 .free_shipping_banner { display: none; }
+
+/* Background Test */
+.gwo_background_test_var_1 { background-color: #FFFFF1; /*Ivory*/}
+.gwo_background_test_var_2 { background-color: #EEEEFC; /*Lavender*/}
+.gwo_background_test_var_3 { background-color: #F4FFFF; /*Azure*/}
+.gwo_background_test_var_4 { background-color: #F1F8FF; /*Alice Blue*/}

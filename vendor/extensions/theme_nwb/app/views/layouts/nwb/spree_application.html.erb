@@ -3,9 +3,12 @@
 <head>
 <%= render :partial => 'shared/head'%>
 </head>
-  
 <%= render :partial => 'shared/gwo/control', :locals => {:eid => NWB_GLOBAL_TEST_EID, :domain_name => NWB_DOMAIN_NAME} %>
+
+<script>utmx_section('body_tag')</script>
 <body>
+<%= render :text=>"</noscript>" %>
+
   <div id="container">
     <%= render "/shared/nwb_navigation" %>
     <div id="main">
