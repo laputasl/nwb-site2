@@ -1,11 +1,11 @@
 <% if @site.code == "pwb" %>
 <script>utmx_section('banner')</script>
   <% if @taxon.id == 3001 || @taxon.ancestors.any? {|t| t.id == 3001 } %>
-    <%#= image_tag "/pwb/images/banner-dog-supplies.jpg", :alt => "PetWellbeing.com : Dog Supplies", :id=>"dog_banner" %>
-    <%= image_tag "/pwb/images/banner-dog-supplies.jpg", :alt => "PetWellbeing.com : Dog Supplies", :id=>"dog_banner", :style=>"display:none" %>
+    <%= image_tag "/pwb/images/banner-dog-supplies.jpg", :alt => "PetWellbeing.com : Dog Supplies", :class=>"original_banner" %>
+    <%= image_tag "/pwb/images/banner-dog-supplies-free-shipping.jpg", :alt => "PetWellbeing.com : Dog Supplies", :class=>"free_shipping_banner" %>
   <% elsif @taxon.id == 3002 || @taxon.ancestors.any? {|t| t.id == 3002 } %>
-    <%#= image_tag "/pwb/images/banner-cat-supplies.jpg", :alt => "PetWellbeing.com : Cat Supplies", :id=>"cat_banner" %>
-    <%= image_tag "/pwb/images/banner-cat-supplies.jpg", :alt => "PetWellbeing.com : Cat Supplies", :id=>"cat_banner", :style=>"display:none" %>
+    <%= image_tag "/pwb/images/banner-cat-supplies.jpg", :alt => "PetWellbeing.com : Cat Supplies", :class=>"original_banner" %>
+    <%= image_tag "/pwb/images/banner-cat-supplies-free-shipping.jpg", :alt => "PetWellbeing.com : Cat Supplies", :class=>"free_shipping_banner" %>
   <% end %>
 <%= render :text=>"</noscript>" %>
 <% end %>

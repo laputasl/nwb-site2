@@ -1,0 +1,6 @@
+.original_banner { display: block; }
+.free_shipping_banner { display: none; }
+.gwo_banner_test_var_1 .original_banner { display: none; }
+.gwo_banner_test_var_1 .free_shipping_banner { display: block; }
+.gwo_banner_test_var_2 .original_banner { display: none; }
+.gwo_banner_test_var_2 .free_shipping_banner { display: none; }
