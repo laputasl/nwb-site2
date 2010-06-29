@@ -14,7 +14,7 @@ class SiteHooks < Spree::ThemeSupport::HookListener
   replace :admin_users_index_search, :partial => "admin/users/search"
 
   insert_after :admin_products_index_headers, :partial => "admin/products/index_headers"
-  insert_after :admin_products_index_rows, :partial => "admin/products/index_rows"
+  insert_after :admin_products_index_rows, :partial  => "admin/products/index_rows"
   insert_before :admin_products_index_search, :partial => "admin/products/index_search_fields"
 
   #remove :homepage_sidebar_navigation
@@ -57,4 +57,6 @@ class SiteHooks < Spree::ThemeSupport::HookListener
   end
 
   insert_after :admin_order_form_total, :partial => "admin/orders/store"
+  insert_before :admin_product_form_right, :partial => "admin/products/availability"
+
 end
