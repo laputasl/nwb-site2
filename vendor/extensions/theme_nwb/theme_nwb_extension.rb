@@ -23,20 +23,19 @@ class ThemeNwbExtension < Spree::Extension
       def sales_total
         @taxonomy = Taxonomy.first
         params[:search] = {} unless params[:search]
-
         if params[:search][:created_at_after].blank?
-          params[:search][:created_at_after] = Time.zone.now.beginning_of_day
+          params[:search][:created_at_after] = Time.now.beginning_of_day
         else
-          params[:search][:created_at_after] = Time.zone.parse(params[:search][:created_at_after]).beginning_of_day rescue Time.zone.now.beginning_of_month
+          params[:search][:created_at_after] = Time.parse(params[:search][:created_at_after]).beginning_of_day rescue Time.now.beginning_of_day
         end
 
         if params[:search][:created_at_before].blank?
-          params[:search][:created_at_before] = Time.zone.now
+          params[:search][:created_at_before] = Time.now
         else
-          params[:search][:created_at_before] = Time.zone.parse(params[:search][:created_at_before]).end_of_day rescue ""
+          params[:search][:created_at_before] = Time.parse(params[:search][:created_at_before]).end_of_day rescue ""
         end
 
-        if params[:search][:completed_at_not_null].blank?
+        unless params[:search].has_key? :completed_at_not_null
           params[:search][:completed_at_not_null] = 1
         end
 
@@ -50,7 +49,7 @@ class ThemeNwbExtension < Spree::Extension
         end
         #set order by to default or form result
         @search.order ||= "descend_by_created_at"
-        @orders = @search.find(:all, :joins => [:store, :adjustments, :credits, :charges]).uniq
+        @orders = @search.find(:all).uniq
 
         @item_total = @orders.inject(0){|acc, o| acc + o.item_total}
         @charge_total = @orders.inject(0){|acc, o| acc + o.adjustment_total}
