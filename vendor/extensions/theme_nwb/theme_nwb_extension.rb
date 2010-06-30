@@ -25,7 +25,7 @@ class ThemeNwbExtension < Spree::Extension
         params[:search] = {} unless params[:search]
 
         if params[:search][:created_at_after].blank?
-          params[:search][:created_at_after] = Time.zone.now.beginning_of_month
+          params[:search][:created_at_after] = Time.zone.now.beginning_of_day
         else
           params[:search][:created_at_after] = Time.zone.parse(params[:search][:created_at_after]).beginning_of_day rescue Time.zone.now.beginning_of_month
         end
@@ -36,8 +36,12 @@ class ThemeNwbExtension < Spree::Extension
           params[:search][:created_at_before] = Time.zone.parse(params[:search][:created_at_before]).end_of_day rescue ""
         end
 
+        if params[:search][:completed_at_not_null].blank?
+          params[:search][:completed_at_not_null] = 1
+        end
+
         @search = Order.searchlogic(params[:search])
-        
+
         if params[:category_id].present? && @taxon = Taxon.find(params[:category_id])
           @search = @search.line_items_variant_product_in_taxon(@taxon)
         end
@@ -46,8 +50,8 @@ class ThemeNwbExtension < Spree::Extension
         end
         #set order by to default or form result
         @search.order ||= "descend_by_created_at"
-        @orders = @search.find(:all).uniq
-        
+        @orders = @search.find(:all, :joins => [:store, :adjustments, :credits, :charges]).uniq
+
         @item_total = @orders.inject(0){|acc, o| acc + o.item_total}
         @charge_total = @orders.inject(0){|acc, o| acc + o.adjustment_total}
         @credit_total = @orders.inject(0){|acc, o| acc + o.credit_total}
@@ -73,14 +77,14 @@ class ThemeNwbExtension < Spree::Extension
             options.reverse_merge! :alt => image.alt.blank? ? product.name : image.alt
 
             if request.ssl?
-              image_tag image.attachment.url(style).gsub("http://", "https://"), options
+              image_tag image.attachment.url(style) .gsub("http://", "https://"), options
             else
               image_tag image.attachment.url(style), options
             end
 
           end
         end
-        
+
         define_method "#{style}_image_url" do |product|
           if product.images.empty?
             url_for( {:controller=> "/#{@current_domain}/images/noimage/#{style}.jpg", :path_only =>false} )
@@ -93,8 +97,8 @@ class ThemeNwbExtension < Spree::Extension
             end
           end
         end
-        
-        
+
+
       end
 
     end
