@@ -51,7 +51,7 @@ class SiteExtension < Spree::Extension
           render :template => "orders/edit"
         end
       end
-      
+
       private
       # This is a verison of find_order that handles this situation better... I hope
       def find_cart
@@ -64,7 +64,7 @@ class SiteExtension < Spree::Extension
         session[:order_token] = @order.token
         @order
       end
-      
+
     end
 
     ProductsController.class_eval do
@@ -189,7 +189,7 @@ class SiteExtension < Spree::Extension
       include ActionView::Helpers::NumberHelper
       belongs_to :store
       has_many :reminder_messages, :as => :remindable
-      
+
       def after_initialize #fallback to ensure order is always assigned to a store
         self.store ||= Store.first
       end
@@ -462,8 +462,8 @@ class SiteExtension < Spree::Extension
 
         params[:remove].each do |line_item, value|
           LineItem.destroy line_item.to_i
+          params[:order][:line_items_attributes].reject! { |key, item| item["id"] == line_item}
         end
-
       end
 
       def recalculate_totals
@@ -789,7 +789,7 @@ class SiteExtension < Spree::Extension
 
       def force_shipping_method
         #set default shippping method if none selected yet (or it's no longer valid)
-        available_shipping_methods = @checkout.shipping_methods
+        available_shipping_methods = @checkout.shipping_methods(:front_end)
 
         if (@checkout.shipping_method.nil? || !available_shipping_methods.map(&:id).include?(@checkout.shipping_method.id)) && @checkout.ship_address.valid?
 
@@ -1007,13 +1007,13 @@ class SiteExtension < Spree::Extension
       end
 
       #excludes PO (APO / FPO) boxes
-      def available_to_order?(order)
+      def available_to_order?(order, display_on=nil)
         po_regex = /\b((A|a|F|f)?[P|p](OST|ost)?\.?\s?[O|o|0](ffice|FFICE)?\.?\s)?([B|b][O|o|0][X|x])\s(\d+)/
 
         if self.name.upcase.include?("UPS") && (order.ship_address.address1 =~ po_regex || order.ship_address.address2 =~ po_regex)
           return false
         else
-          core_available_to_order?(order)
+          core_available_to_order?(order, display_on)
         end
       end
     end
