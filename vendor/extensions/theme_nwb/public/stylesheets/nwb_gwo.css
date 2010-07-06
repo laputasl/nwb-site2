@@ -18,3 +18,17 @@
 .gwo_background_test_var_3 #container { background-color: white; }
 .gwo_background_test_var_4 { background-color: #F1F8FF; /*Alice Blue*/}
 .gwo_background_test_var_4 #container { background-color: white; }
+
+/* Seals Test */
+.gwo_seal_test_var_1 .seal{
+    width: 136px;
+    height: 113px;
+    margin: 6px 12px 0px 12px;
+    background-image: url('/images/green1.png');
+}
+.gwo_seal_test_var_2 .seal{
+    width: 136px;
+    height: 113px;
+    margin: 6px 12px 0px 12px;
+    background-image: url('/images/green2.png');
+}
