@@ -35,37 +35,6 @@ class SiteExtension < Spree::Extension
       end
     end
 
-    OrdersController.class_eval do
-      skip_before_filter :verify_authenticity_token, :only => [:add_variant_only]
-
-
-      def add_variant_only
-        begin
-          order = find_cart
-          variants = params[:variants].map{|variant_id, quant|[Variant.find(variant_id), quant.to_i]}.each do |item|
-            order.add_variant item[0], item[1]
-          end
-          redirect_to edit_order_url(@order)
-        rescue ActiveRecord::RecordNotFound => rnf
-          flash[:error] = "Product does not exist"
-          render :template => "orders/edit"
-        end
-      end
-
-      private
-      # This is a verison of find_order that handles this situation better... I hope
-      def find_cart
-        if !session[:order_id].blank?
-          @order = Order.find_or_create_by_id(session[:order_id])
-        else
-          @order = Order.create(:user => current_user)
-        end
-        session[:order_id]    = @order.id
-        session[:order_token] = @order.token
-        @order
-      end
-
-    end
 
     ProductsController.class_eval do
       before_filter :can_show_product, :only => :show
@@ -213,7 +182,7 @@ class SiteExtension < Spree::Extension
         checkout.update_attribute(:ship_address_id, addr.id)
 
         rates = shipping_rate_hash
-        checkout.enable_validation_group(:register)
+        checkout.enable_validation_group(:delivery)
 
         if rates.size > 0 && checkout.shipping_method_id.nil?
           checkout.update_attribute(:shipping_method_id, rates[0][:id])
@@ -382,11 +351,26 @@ class SiteExtension < Spree::Extension
 
     OrdersController.class_eval do
       before_filter :set_analytics
+      skip_before_filter :verify_authenticity_token, :only => [:add_variant_only]
+
       create.before << :assign_to_store
       update.before :check_for_removed_items
       update.after :recalculate_totals
 
       ssl_allowed :update
+
+      def add_variant_only
+        begin
+          order = find_cart
+          variants = params[:variants].map{|variant_id, quant|[Variant.find(variant_id), quant.to_i]}.each do |item|
+            order.add_variant item[0], item[1]
+          end
+          redirect_to edit_order_url(@order)
+        rescue ActiveRecord::RecordNotFound => rnf
+          flash[:error] = "Product does not exist"
+          render :template => "orders/edit"
+        end
+      end
 
       def index
         render :text => "File not found", :status => 404
@@ -469,6 +453,18 @@ class SiteExtension < Spree::Extension
       def recalculate_totals
         @order.update_totals!
         @order.reload
+      end
+
+      # This is a verison of find_order that handles this situation better... I hope
+      def find_cart
+        if !session[:order_id].blank?
+          @order = Order.find_or_create_by_id(session[:order_id])
+        else
+          @order = Order.create(:user => current_user)
+        end
+        session[:order_id]    = @order.id
+        session[:order_token] = @order.token
+        @order
       end
     end
 
