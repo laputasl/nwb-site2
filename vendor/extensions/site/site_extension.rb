@@ -341,7 +341,7 @@ class SiteExtension < Spree::Extension
 
       private
       def check_order_state
-        self.ready! if (order.paid? && !inventory_units.any? {|unit| unit.backordered? })
+        self.ready! if is_ready? && self.can_ready?
       end
 
       def is_ready?
