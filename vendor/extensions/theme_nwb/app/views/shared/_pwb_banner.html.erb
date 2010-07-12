@@ -1,9 +1,13 @@
 <% if @site.code == "pwb" %>
 <script>utmx_section('banner')</script>
-  <% if @taxon.id == 3001 || @taxon.ancestors.any? {|t| t.id == 3001 } %>    
-    <%= image_tag "/pwb/images/banner-dog-supplies-free-shipping.jpg", :alt => "PetWellbeing.com : Dog Supplies" %>
+  <% if @taxon.id == 3001 || @taxon.ancestors.any? {|t| t.id == 3001 } %>
+    <% if country_id != 35 %>
+      <%= image_tag "/pwb/images/banner-dog-supplies-free-shipping.jpg", :alt => "PetWellbeing.com : Dog Supplies" %>
+    <% end %>
   <% elsif @taxon.id == 3002 || @taxon.ancestors.any? {|t| t.id == 3002 } %>
-    <%= image_tag "/pwb/images/banner-cat-supplies-free-shipping.jpg", :alt => "PetWellbeing.com : Cat Supplies" %>
+    <% if country_id != 35 %>
+      <%= image_tag "/pwb/images/banner-cat-supplies-free-shipping.jpg", :alt => "PetWellbeing.com : Cat Supplies" %>
+    <% end %>
   <% end %>
 <%= render :text=>"</noscript>" %>
 <% end %>

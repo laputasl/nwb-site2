@@ -1,4 +1,4 @@
-/* Banner Test */
+/* Banner Test (done) */
 .original_banner { display: block; }
 .free_shipping_banner { display: none; }
 .gwo_banner_test_var_1 .original_banner { display: none; }
@@ -6,7 +6,7 @@
 .gwo_banner_test_var_2 .original_banner { display: none; }
 .gwo_banner_test_var_2 .free_shipping_banner { display: none; }
 
-/* Product Headline Font Size Test*/
+/* Product Headline Font Size Test */
 .product_headline_font_size_var_1 .product h2{
     margin: 0 0 10px 0;
     text-decoration: none;
@@ -26,8 +26,15 @@
     margin: 0.67em 0;
 }
 
+/* Background Test */
+.gwo_background_var_1 { background-color: #FFFFF1; /*Ivory*/}
+.gwo_background_var_2 { background-color: #E9EFE4; /*Green1*/}
+.gwo_background_var_3 { background-color: #F0FFEB; /*Green2*/}
+#container { background-color: white; }
+
 /* Product Headline Font Family Test */
 .product_headline_font_family_var_1 .product h2 { font-family: Tahoma;}
 .product_headline_font_family_var_2 .product h2 { font-family: Verdana;}
 .product_headline_font_family_var_3 .product h2 { font-family: Trebuchet MS;}
 .product_headline_font_family_var_4 .product h2 { font-family: Georgia;}
+
