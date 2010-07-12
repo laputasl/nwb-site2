@@ -27,7 +27,7 @@ Spree::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
 
   config.gem "highline", :version => '1.5.1'
-  config.gem 'authlogic', :version => '>=2.1.2'
+  config.gem 'authlogic', :version => '2.1.3'
   config.gem 'authlogic-oid', :lib => "authlogic_openid", :version => '1.0.4'
   config.gem "activemerchant", :lib => "active_merchant", :version => '1.5.1'
   config.gem 'activerecord-tableless', :lib => 'tableless', :version => '0.1.0'
@@ -36,12 +36,13 @@ Spree::Initializer.run do |config|
   config.gem 'chronic', :version => '0.2.3'
   config.gem 'whenever', :lib => false, :version => '0.3.7'
   config.gem 'searchlogic', :version => '2.3.5'
-  config.gem 'will_paginate', :lib => 'will_paginate', :version => '2.3.11'
-  config.gem 'state_machine', :lib => 'state_machine', :version => '0.8.0'
+  config.gem 'will_paginate', :lib => 'will_paginate', :version => '2.3.14'
+  config.gem 'state_machine', :lib => 'state_machine', :version => '0.9.2'
   config.gem "faker", :version => '0.3.1'
   config.gem 'paperclip', :version => '>=2.3.1.1'
-  config.gem 'refraction', :version => '0.2.0'       
+  config.gem 'refraction', :version => '0.2.0'
   config.gem 'exceptional', :version => '2.0.9'
+  config.gem 'ruby-openid', :lib => "openid", :version => '>=2.0.4'
 
   # Only load the plugins named here, in the order given. By default, all plugins
   # in vendor/plugins are loaded in alphabetical order.
@@ -79,7 +80,7 @@ Spree::Initializer.run do |config|
   # The internationalization framework can be changed to have another default locale (standard is :en) or more load paths.
   # All files from config/locales/*.rb,yml are added automatically.
   #config.i18n.load_path << Dir[File.join(RAILS_ROOT, 'my', 'locales', '*.{rb,yml}')]
-  config.i18n.default_locale = :'en-US'
+  config.i18n.default_locale = :'en'
 
 end
 
@@ -105,47 +106,40 @@ Time::DATE_FORMATS[:short_date] = "%Y-%m-%d"
 #==================================NWB==========================================
 #*** Background Test
 #NWB_GLOBAL_TEST_EID = "3063478576" # local background
-#NWB_GLOBAL_TEST_PID = "UA-16618505-1"
 NWB_GLOBAL_TEST_EID = "2328395807" # staging background
-NWB_GLOBAL_TEST_PID = "UA-981819-14"
 
 #*** Seal Test
 #NWB_GLOBAL_TEST_EID = "2081050742" # local seal
-#NWB_GLOBAL_TEST_PID = "UA-16618505-1"
 #NWB_GLOBAL_TEST_EID = "2990546235" # staging seal
-#NWB_GLOBAL_TEST_PID = "UA-981819-14"
 
-#*** Javascript Sections number & domian name
+
+#*** Javascript Sections number / domian name / PID
 NWB_GLOBAL_TEST_JS_COUNT = 0
 NWB_DOMAIN_NAME = ".naturalwellbeing.com"
+#NWB_GLOBAL_TEST_PID = "UA-16618505-1" # local pid
+NWB_GLOBAL_TEST_PID = "UA-981819-14"  # staging pid
 
 
 #==================================PWB=========================================
 #*** Banner Test
 #PWB_GLOBAL_TEST_EID = "0640388639" # local banners
-#PWB_GLOBAL_TEST_PID = "UA-16618505-1"
 #PWB_GLOBAL_TEST_EID = "3906587456"  # staging banners
-#PWB_GLOBAL_TEST_PID = "UA-981819-14"
 
 #*** Product Headline Font Size Test
 #PWB_GLOBAL_TEST_EID = "0470403630" # local product headline font size
-#PWB_GLOBAL_TEST_PID = "UA-16618505-1"
 #PWB_GLOBAL_TEST_EID = "2150907440" # staging product headline font size
-#PWB_GLOBAL_TEST_PID = "UA-981819-14"
 
 #*** Background Test
 #PWB_GLOBAL_TEST_EID = "0091113658" # local background
-#PWB_GLOBAL_TEST_PID = "UA-16618505-1"
 PWB_GLOBAL_TEST_EID = "0791631371" # staging background
-PWB_GLOBAL_TEST_PID = "UA-981819-14"
-
 
 #*** Product Headline Font Family Test
 #PWB_GLOBAL_TEST_EID = "0173452456" # local product headline font family
-#PWB_GLOBAL_TEST_PID = "UA-16618505-1"
 #PWB_GLOBAL_TEST_EID = ""  # staging product headline font family
-#PWB_GLOBAL_TEST_PID = "UA-981819-14"
 
-#*** Javascript Sections number & domian name
+
+#*** Javascript Sections number / domian name / PID
 PWB_GLOBAL_TEST_JS_COUNT = 0
 PWB_DOMAIN_NAME = ".petwellbeing.com"
+#PWB_GLOBAL_TEST_PID = "UA-16618505-1" # local pid
+PWB_GLOBAL_TEST_PID = "UA-981819-14" # staging pid

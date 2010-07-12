@@ -35,37 +35,6 @@ class SiteExtension < Spree::Extension
       end
     end
 
-    OrdersController.class_eval do
-      skip_before_filter :verify_authenticity_token, :only => [:add_variant_only]
-
-
-      def add_variant_only
-        begin
-          order = find_cart
-          variants = params[:variants].map{|variant_id, quant|[Variant.find(variant_id), quant.to_i]}.each do |item|
-            order.add_variant item[0], item[1]
-          end
-          redirect_to edit_order_url(@order)
-        rescue ActiveRecord::RecordNotFound => rnf
-          flash[:error] = "Product does not exist"
-          render :template => "orders/edit"
-        end
-      end
-      
-      private
-      # This is a verison of find_order that handles this situation better... I hope
-      def find_cart
-        if !session[:order_id].blank?
-          @order = Order.find_or_create_by_id(session[:order_id])
-        else
-          @order = Order.create(:user => current_user)
-        end
-        session[:order_id]    = @order.id
-        session[:order_token] = @order.token
-        @order
-      end
-      
-    end
 
     ProductsController.class_eval do
       before_filter :can_show_product, :only => :show
@@ -189,7 +158,7 @@ class SiteExtension < Spree::Extension
       include ActionView::Helpers::NumberHelper
       belongs_to :store
       has_many :reminder_messages, :as => :remindable
-      
+
       def after_initialize #fallback to ensure order is always assigned to a store
         self.store ||= Store.first
       end
@@ -213,7 +182,7 @@ class SiteExtension < Spree::Extension
         checkout.update_attribute(:ship_address_id, addr.id)
 
         rates = shipping_rate_hash
-        checkout.enable_validation_group(:register)
+        checkout.enable_validation_group(:delivery)
 
         if rates.size > 0 && checkout.shipping_method_id.nil?
           checkout.update_attribute(:shipping_method_id, rates[0][:id])
@@ -372,7 +341,7 @@ class SiteExtension < Spree::Extension
 
       private
       def check_order_state
-        self.ready! if (order.paid? && !inventory_units.any? {|unit| unit.backordered? })
+        self.ready! if is_ready? && self.can_ready?
       end
 
       def is_ready?
@@ -382,11 +351,26 @@ class SiteExtension < Spree::Extension
 
     OrdersController.class_eval do
       before_filter :set_analytics
+      skip_before_filter :verify_authenticity_token, :only => [:add_variant_only]
+
       create.before << :assign_to_store
       update.before :check_for_removed_items
       update.after :recalculate_totals
 
       ssl_allowed :update
+
+      def add_variant_only
+        begin
+          order = find_cart
+          variants = params[:variants].map{|variant_id, quant|[Variant.find(variant_id), quant.to_i]}.each do |item|
+            order.add_variant item[0], item[1]
+          end
+          redirect_to edit_order_url(@order)
+        rescue ActiveRecord::RecordNotFound => rnf
+          flash[:error] = "Product does not exist"
+          render :template => "orders/edit"
+        end
+      end
 
       def index
         render :text => "File not found", :status => 404
@@ -462,13 +446,25 @@ class SiteExtension < Spree::Extension
 
         params[:remove].each do |line_item, value|
           LineItem.destroy line_item.to_i
+          params[:order][:line_items_attributes].reject! { |key, item| item["id"] == line_item}
         end
-
       end
 
       def recalculate_totals
         @order.update_totals!
         @order.reload
+      end
+
+      # This is a verison of find_order that handles this situation better... I hope
+      def find_cart
+        if !session[:order_id].blank?
+          @order = Order.find_or_create_by_id(session[:order_id])
+        else
+          @order = Order.create(:user => current_user)
+        end
+        session[:order_id]    = @order.id
+        session[:order_token] = @order.token
+        @order
       end
     end
 
@@ -789,7 +785,7 @@ class SiteExtension < Spree::Extension
 
       def force_shipping_method
         #set default shippping method if none selected yet (or it's no longer valid)
-        available_shipping_methods = @checkout.shipping_methods
+        available_shipping_methods = @checkout.shipping_methods(:front_end)
 
         if (@checkout.shipping_method.nil? || !available_shipping_methods.map(&:id).include?(@checkout.shipping_method.id)) && @checkout.ship_address.valid?
 
@@ -1007,13 +1003,13 @@ class SiteExtension < Spree::Extension
       end
 
       #excludes PO (APO / FPO) boxes
-      def available_to_order?(order)
+      def available_to_order?(order, display_on=nil)
         po_regex = /\b((A|a|F|f)?[P|p](OST|ost)?\.?\s?[O|o|0](ffice|FFICE)?\.?\s)?([B|b][O|o|0][X|x])\s(\d+)/
 
         if self.name.upcase.include?("UPS") && (order.ship_address.address1 =~ po_regex || order.ship_address.address2 =~ po_regex)
           return false
         else
-          core_available_to_order?(order)
+          core_available_to_order?(order, display_on)
         end
       end
     end
