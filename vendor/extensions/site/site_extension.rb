@@ -34,7 +34,64 @@ class SiteExtension < Spree::Extension
         @countries = Country.find(:all).sort
       end
     end
+    
+    Admin::ReportsController.class_eval do
+      # def quarters end_date=Time.now, qtrs=1
+      #   qtrs = 1 if qtrs<1
+      #   mnths = qtrs.to_i * 3
+      #   [mnths.months.ago(end_date).beginning_of_quarter, end_date.end_of_quarter]
+      # end
+      
+      def group_by_ship_country_and_state orders
+        grouped = {}
+        orders.each do |order|
+          addr = order.bill_address
+          country = addr.country.iso
+          state = addr.state_name.blank? ? addr.state.abbr : addr.state_name
+          
+          grouped[country] ||= {}
+          grouped[country][state] ||= {
+            :item_total   => 0,
+            :charge_total => 0,
+            :credit_total => 0,
+            :tax_total    => 0,
+            :sales_total  => 0,
+            :orders       => 0
+          }
+          
+          grouped[country][state][:item_total]   += order.item_total   
+          grouped[country][state][:charge_total] += order.charge_total 
+          grouped[country][state][:credit_total] += order.credit_total 
+          grouped[country][state][:tax_total]    += order.tax_total    
+          grouped[country][state][:sales_total]  += order.total  
+          grouped[country][state][:orders]       += 1
+        end
+        grouped
+      end
+      
+      def country_sales_by_quarter
+        params[:search] = {} unless params[:search]
 
+        # We'll look at the orders by quarter, looking at the last quarter by default
+        params[:search][:created_at_after] = Time.zone.parse(params[:search][:created_at_after]).beginning_of_quarter rescue 3.months.ago(Time.zone.now).beginning_of_quarter
+        params[:search][:created_at_before] = Time.zone.parse(params[:search][:created_at_before]).end_of_quarter rescue 3.months.ago(Time.zone.now).end_of_quarter
+        params[:search][:bill_address_country_iso_eq] ||= "CA" 
+        
+        @search = Order.searchlogic(params[:search])
+        @search.checkout_complete = true
+        @groups = group_by_ship_country_and_state(@search.find(:all))
+        # @item_total = @search.sum(:item_total)
+        # @charge_total = @search.sum(:adjustment_total)
+        # # @tax_total = @search.sum(:tax_total)
+        # @credit_total = @search.sum(:credit_total)
+        # @sales_total = @search.sum(:total)
+        # @order_count = @search.count
+
+      end #inventory_report
+    end
+    Admin::ReportsController::AVAILABLE_REPORTS.merge!(
+      :country_sales_by_quarter => {:name => "Country Sales by Quarter", :description => "Country Sales by Quarter"}
+    )
 
     ProductsController.class_eval do
       before_filter :can_show_product, :only => :show

@@ -18,3 +18,4 @@ en:
     label: Product Availability
     in_stock: In Stock
     out_of_stock: Out of Stock
+  country_sales_by_quarter: Country Sales By Quarter

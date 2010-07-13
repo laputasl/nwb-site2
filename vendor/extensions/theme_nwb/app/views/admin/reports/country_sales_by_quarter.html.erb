@@ -1,0 +1,38 @@
+<h1><%= t("country_sales_by_quarter") %> - <%=@range_name%></h1>
+<table class="admin-report">
+  <thead>
+    <tr>
+      <th align="left" scope="col"><%= t("country")%></th>
+      <th align="left" scope="col"><%= t("state")%></th>
+      <th align="right" scope="col"><%= t("item_total")%></th>
+      <th align="right" scope="col"><%= t("charge_total")%></th>
+      <th align="right" scope="col"><%= t("credit_total")%></th>
+      <th align="right" scope="col"><%= t("tax_total")%></th>
+      <th align="right" scope="col"><%= t("sales_total")%></th>
+      <th align="right" scope="col"><%= t("orders")%></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%
+    @groups.each do |country, states|
+      states.each do |state, totals|%>
+    <tr>
+      <th align="left" scope="col"><%= country%></th>
+      <th align="left" scope="col"><%= state%></th>
+      <td align="right" scope="col"><%= number_to_currency(totals[:item_total])%></td>
+      <td align="right" scope="col"><%= number_to_currency(totals[:charge_total])%></td>
+      <td align="right" scope="col"><%= number_to_currency(totals[:credit_total])%></td>
+      <td align="right" scope="col"><%= number_to_currency(totals[:tax_total])%></td>
+      <td align="right" scope="col"><%= number_to_currency(totals[:sales_total])%></td>
+      <td align="right" scope="col"><%= totals[:orders].to_i%></td>
+    </tr>
+        
+      <%end
+    end
+    %>
+  </tbody>
+</table>
+<% content_for :sidebar do %>
+  <%= render :partial => 'admin/shared/country_report_criteria', :locals => {} %>
+<% end %>
+
