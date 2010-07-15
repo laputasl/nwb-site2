@@ -1,7 +1,0 @@
-<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
- <ShortName>Pet WellBeing</ShortName>
- <Description>Find natural products for your pet</Description>
- <Tags>natural herbal remedies pet dog cat</Tags>
- <Attribution>Copyright, Natural WellBeing Distribution Inc. 2010, Some Rights Reserved.</Attribution>
- <Url type="text/html" template="http://search.petwellbeing.com/search?asug&amp;submit=opensearch&amp;w={searchTerm s}"/>
-</OpenSearchDescription>
