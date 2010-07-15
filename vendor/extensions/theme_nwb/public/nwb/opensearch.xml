@@ -1,0 +1,7 @@
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+ <ShortName>Natural WellBeing</ShortName>
+ <Description>Find natural products for your health</Description>
+ <Tags>natural herbal remedies</Tags>
+ <Url type="text/html" template="http://search.naturalwellbeing.com/search?asug&amp;submit=opensearch&amp;w={searchTerm s}"/>
+ <Attribution>Copyright, Natural WellBeing Distribution Inc. 2010, Some Rights Reserved.</Attribution>
+</OpenSearchDescription>

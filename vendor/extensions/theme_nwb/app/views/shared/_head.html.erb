@@ -27,5 +27,7 @@
     <script type="text/javascript" src="http://cdn.powerreviews.com/repos/10964/pr/pwr/engine/js/full.js"></script>
   <% end %>
 <% end %>
+<link rel="search" type="application/opensearchdescription+xml" title="<%= Spree::Config["#{@site.code}_opensearch_title"] %>" href="/<%=@site.code%>/opensearch.xml" />
+
 <meta property="fb:admins" content="1238192791" />
 <%= yield :head %>
