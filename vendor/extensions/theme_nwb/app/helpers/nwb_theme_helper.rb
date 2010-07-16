@@ -1,4 +1,5 @@
 module NwbThemeHelper 
+
   def self.volume_levels prod
     volume_prices = prod.master.volume_prices
     re_rng = /(\d+)(\D+)(\d*)/
@@ -16,4 +17,8 @@ module NwbThemeHelper
       Struct::Level.new(price.amount.to_f, first, last, price.display)
     end
   end
+  
+  
+  
+  
 end
