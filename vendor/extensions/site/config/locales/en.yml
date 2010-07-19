@@ -14,3 +14,8 @@ en:
     # keys correspond to Checkout state names:
     delivery: Shipping and Payment
     confirm: Confirm
+  stock_availability:
+    label: Product Availability
+    in_stock: In Stock
+    out_of_stock: Out of Stock
+  country_sales_by_quarter: Country Sales By Quarter

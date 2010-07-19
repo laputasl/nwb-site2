@@ -1,0 +1,48 @@
+<Products>
+  
+  <%products.each do |prod|%>
+  <Product>
+    <Merchant_SKU><%= prod.sku%></Merchant_SKU>
+    <Product_Name><%= html_escape(prod.name)%></Product_Name>
+    <Product_URL><%=url_for(:controller=>'products', :action=> :show, :id=>prod, :only_path => false, "utm_campaign"=>"cse-marketing", "utm_medium"=>"feed", "utm_source"=>"shopping")%></Product_URL> 
+    <Current_Price><%= number_to_currency(prod.master.volume_price(1).to_s) %></Current_Price> 
+    <Original_Price><%= number_to_currency(prod.price) %></Original_Price> 
+    <%
+    cse = cse_taxon prod, "shopping-dot-com"
+    unless cse.nil?
+    %>
+    <Category_ID><%= cse.title%></Category_ID>
+    <Category_Name><%= cse.parent.name%></Category_Name>
+    <Sub-category_Name><%= cse.name%></Sub-category_Name>
+    <%end%>
+    <Product_Description><%=truncate(html_to_text(prod.description), 10000)%></Product_Description>
+
+    <Image_URL><%=large_image_url(prod)%></Image_URL>
+    <%
+    imgs = prod.images.slice(1..-1)
+    unless imgs.nil?
+      imgs.each_with_index do |img, i|%>
+    <Alternative_Image_URL_<%= i+1%>><%=img.attachment.url(:large)%></Alternative_Image_URL_1>
+    <%
+      end
+    end
+    %>
+    <Condition>New</Condition>
+
+    <Product_Launch_Date><%= prod.created_at.strftime("%Y%m%d")%></Product_Launch_Date>
+
+    <Stock_Availability><%= (prod.stock_availability == 'in_stock')? "Yes" : "Back-Order"%></Stock_Availability>
+    <Stock_Description>Free shipping on orders over <%= number_to_currency(Spree::Config["#{@site.code}_free_shipping_at"])%></Stock_Description>
+
+    <Shipping_Weight><%=prod.weight%></Shipping_Weight>
+    <Zip_Code>30354</Zip_Code>
+    <Estimated_Ship_Date>Allow 2-10 Days for Delivery</Estimated_Ship_Date>
+    <Merchandising_Type>New</Merchandising_Type>
+    <Bundle><%= (prod.parts.size > 0) ? "Yes" : "No"%></Bundle>
+    <%if prod.parts.size > 0%>
+    <Related_Products><%=prod.parts[0,3].map(&:sku).join(',')%></Related_Products>
+    <%end%>
+    
+  </Product>
+  <%end%>
+</Products>

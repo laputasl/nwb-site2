@@ -1,7 +1,5 @@
-<% form_tag products_url,  {:method => :get,:id => "searchForm"} do %>
-  <fieldset>
-    <%= text_field_tag :keywords, params[:keywords], :id => "search" %>
-    <%= submit_tag t(:search), :name => nil, :id => "btnSearch" %>
-     <p><a href="#" title="Popular Searches">Popular Searches</a></p>
-  </fieldset>
-<% end %>
+<form method="get" action="<%= Spree::Config[:pwb_search_domain]%>/search" name="searchform" id="searchForm">
+  <input name="w" size="20" type="text" id="sli_search_1" autocomplete="off" >
+  <input type="hidden" name="asug" />
+  <input value="Search"  type="submit" id="btnSearch">
+</form>

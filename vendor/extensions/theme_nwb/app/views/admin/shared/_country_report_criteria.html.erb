@@ -1,0 +1,20 @@
+<% form_for @search do |s| %>
+<label><%= t("date_range") %></label><br />
+<div class="yui-g date-range-filter">
+  <div class="yui-u sub-field first">
+    <%= s.unobtrusive_date_text_picker :created_at_after %><br />
+    <label class="sub"><%= t("start") %></label>
+  </div>
+  <div class="yui-u sub-field">
+    <%= s.unobtrusive_date_text_picker :created_at_before %><br />
+    <label><%= t("stop") %></label>
+  </div>
+</div>
+
+<p>
+  <label><%= t("country") %></label><br />
+  <%= s.select  :bill_address_country_iso_eq, Country.find(:all).collect{ |c| [c.name, c.iso]}, {:include_blank => true}  %>
+</p>
+
+  <p><%= button t("search") %></p>
+<% end %>

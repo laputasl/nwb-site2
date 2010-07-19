@@ -79,6 +79,16 @@
       <%= f.text_field :reminder, :class => 'fullwidth'  %>
       <%= f.error_message_on :reminder %>
     <% end %>
+
+    <% f.field_container :show_powerreviews do %>
+      <%= f.label :show_powerreviews, "PowerReviews" %><br />
+      <%= f.radio_button :show_powerreviews, true %>
+      <%= f.label :show_powerreviews, "Show PowerReviews" %><br />
+      <%= f.radio_button :show_powerreviews, false %>
+      <%= f.label :show_powerreviews, "Hide PowerReviews" %>
+      <%= f.error_message_on :show_powerreviews %>
+    <% end %>
+
   </div>
 
   <%= render :partial => 'admin/shared/edit_resource_links' %>

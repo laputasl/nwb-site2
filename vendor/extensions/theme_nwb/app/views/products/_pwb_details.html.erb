@@ -15,6 +15,7 @@
     </p>
   </div>
   <div class="info">
+    <%if @product.show_powerreviews %>
     <div class="rating">
       <div class="pr_snippet_product">
         <script type="text/javascript">
@@ -23,6 +24,7 @@
         </script>
       </div>
     </div>
+    <%end%>
     <p class="subtitle"><%= @product.subtitle_main %></p>
     <div class="sales_copy"><%= @product.sales_copy %></div>
 
@@ -53,11 +55,13 @@
 
     <a name="reviews"></a>
     <h3>Reviews</h3>
+    <%if @product.show_powerreviews%>
     <div class="pr_review_summary">
       <script type="text/javascript">
         POWERREVIEWS.display.engine(document, { pr_page_id : "<%= @product.powerreviews_page_id %>" });
       </script>
     </div>
+    <%end%>
     <p class="right"><a href="#" title="Back to Top &raquo;">Back to Top &raquo;</a></p>
 
     <a name="directions"></a>
