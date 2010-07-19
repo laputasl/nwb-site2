@@ -11,13 +11,10 @@
 
 /* Background Test */
 .gwo_background_test_var_1 { background-color: #FFFFF1; /*Ivory*/}
-.gwo_background_test_var_1 #container { background-color: white; }
 .gwo_background_test_var_2 { background-color: #EEEEFC; /*Lavender*/}
-.gwo_background_test_var_2 #container { background-color: white; }
 .gwo_background_test_var_3 { background-color: #F4FFFF; /*Azure*/}
-.gwo_background_test_var_3 #container { background-color: white; }
 .gwo_background_test_var_4 { background-color: #F1F8FF; /*Alice Blue*/}
-.gwo_background_test_var_4 #container { background-color: white; }
+#container { background-color: white; }
 
 /* Seals Test */
 .gwo_seal_test_var_1 .seal{

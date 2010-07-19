@@ -102,50 +102,45 @@ Time::DATE_FORMATS[:short_date] = "%Y-%m-%d"
 # Include your application configuration below
 
 ### global variables for gwo test
-#==================================NWB==========================================
+#==================================NWB=========================================
 #*** Background Test
 #NWB_GLOBAL_TEST_EID = "3063478576" # local background
-#NWB_GLOBAL_TEST_PID = "UA-16618505-1"
-NWB_GLOBAL_TEST_EID = "2328395807" # staging background
-NWB_GLOBAL_TEST_PID = "UA-981819-14"
+#NWB_GLOBAL_TEST_EID = "2328395807" # staging background
 
 #*** Seal Test
 #NWB_GLOBAL_TEST_EID = "2081050742" # local seal
-#NWB_GLOBAL_TEST_PID = "UA-16618505-1"
-#NWB_GLOBAL_TEST_EID = "2990546235" # staging seal
-#NWB_GLOBAL_TEST_PID = "UA-981819-14"
+NWB_GLOBAL_TEST_EID = "2990546235" # staging seal
 
-#*** Javascript Sections number & domian name
+#*** Javascript Sections number / domian name / PID
 NWB_GLOBAL_TEST_JS_COUNT = 0
 NWB_DOMAIN_NAME = ".naturalwellbeing.com"
+#NWB_GLOBAL_TEST_PID = "UA-16618505-1" # local PID
+NWB_GLOBAL_TEST_PID = "UA-981819-14" # staging PID
 
 
 #==================================PWB=========================================
 #*** Banner Test
 #PWB_GLOBAL_TEST_EID = "0640388639" # local banners
-#PWB_GLOBAL_TEST_PID = "UA-16618505-1"
 #PWB_GLOBAL_TEST_EID = "3906587456"  # staging banners
-#PWB_GLOBAL_TEST_PID = "UA-981819-14"
 
 #*** Product Headline Font Size Test
 #PWB_GLOBAL_TEST_EID = "0470403630" # local product headline font size
-#PWB_GLOBAL_TEST_PID = "UA-16618505-1"
 #PWB_GLOBAL_TEST_EID = "2150907440" # staging product headline font size
-#PWB_GLOBAL_TEST_PID = "UA-981819-14"
 
 #*** Background Test
 #PWB_GLOBAL_TEST_EID = "0091113658" # local background
-#PWB_GLOBAL_TEST_PID = "UA-16618505-1"
 PWB_GLOBAL_TEST_EID = "0791631371" # staging background
-PWB_GLOBAL_TEST_PID = "UA-981819-14"
 
+#*** "In Stock" Test
+#PWB_GLOBAL_TEST_EID = "2833583559" # local in-stock
+#PWB_GLOBAL_TEST_EID = "0595081569" # staging in-stock
 
 #*** Product Headline Font Family Test
 #PWB_GLOBAL_TEST_EID = "0173452456" # local product headline font family
-#PWB_GLOBAL_TEST_PID = "UA-16618505-1"
 #PWB_GLOBAL_TEST_EID = ""  # staging product headline font family
-#PWB_GLOBAL_TEST_PID = "UA-981819-14"
 
 #*** Javascript Sections number & domian name
 PWB_GLOBAL_TEST_JS_COUNT = 0
 PWB_DOMAIN_NAME = ".petwellbeing.com"
+#PWB_GLOBAL_TEST_PID = "UA-16618505-1" # local PID
+PWB_GLOBAL_TEST_PID = "UA-981819-14" # staging PID
