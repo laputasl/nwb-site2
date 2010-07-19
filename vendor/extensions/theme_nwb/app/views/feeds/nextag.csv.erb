@@ -1,0 +1,49 @@
+<% 
+require 'csv'
+buf = ""
+%><%=CSV.generate_line([
+"Manufacturer",
+"Manufacturer Part #",
+"Product Name",
+"Product Description",
+"Click-Out URL",
+"Image URL",
+"Price",
+"List Price (MSRP)",
+"Category: NexTag Num...",
+"Stock Status",
+"Product Condition",
+"Marketing Message",
+"Weight"
+], "\t", "\n")
+%>
+<%
+manufacturer = @site.code == "pwb" ? "Pet WellBeing" : "Natural WellBeing"
+
+products.each do |prod|
+  row = []
+  row << manufacturer
+  row << "#{@site.code} #{prod.powerreviews_page_id}"
+  row << prod.name
+  row <<  truncate(html_to_text(prod.short_home).gsub(/\s+/, " "), 500) 
+  row << url_for(:controller=>'products', :action=> :show, :id=>prod, :only_path => false, "utm_campaign"=>"cse-marketing", "utm_medium"=>"feed", "utm_source"=>"nextag")
+  row << product_image_url(prod)
+  row << number_to_currency(prod.master.volume_price(1).to_s)
+  row << number_to_currency(prod.price)
+
+  cse = cse_taxon prod, "nextag"
+  unless cse.nil?
+    row << "#{cse.title} : #{cse.name}"
+  else
+    row << nil
+  end
+  row << (prod.stock_availability == 'in_stock')? "In Stock" : "Out Of Stock"
+  row << "New"
+  
+  row << "Free shipping on orders over #{number_to_currency(Spree::Config["#{@site.code}_free_shipping_at"])}"
+  
+  row << prod.weight
+ %><%= CSV.generate_line(row, "\t", "\n")%>
+<%
+end
+%><%= buf %>
