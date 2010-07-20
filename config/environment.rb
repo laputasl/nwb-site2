@@ -103,21 +103,20 @@ Time::DATE_FORMATS[:short_date] = "%Y-%m-%d"
 # Include your application configuration below
 
 ### global variables for gwo test
-#==================================NWB==========================================
+#==================================NWB=========================================
 #*** Background Test
 #NWB_GLOBAL_TEST_EID = "3063478576" # local background
-NWB_GLOBAL_TEST_EID = "2328395807" # staging background
+#NWB_GLOBAL_TEST_EID = "2328395807" # staging background
 
 #*** Seal Test
 #NWB_GLOBAL_TEST_EID = "2081050742" # local seal
-#NWB_GLOBAL_TEST_EID = "2990546235" # staging seal
-
+NWB_GLOBAL_TEST_EID = "2990546235" # staging seal
 
 #*** Javascript Sections number / domian name / PID
 NWB_GLOBAL_TEST_JS_COUNT = 0
 NWB_DOMAIN_NAME = ".naturalwellbeing.com"
-#NWB_GLOBAL_TEST_PID = "UA-16618505-1" # local pid
-NWB_GLOBAL_TEST_PID = "UA-981819-14"  # staging pid
+#NWB_GLOBAL_TEST_PID = "UA-16618505-1" # local PID
+NWB_GLOBAL_TEST_PID = "UA-981819-14" # staging PID
 
 
 #==================================PWB=========================================
@@ -133,13 +132,16 @@ NWB_GLOBAL_TEST_PID = "UA-981819-14"  # staging pid
 #PWB_GLOBAL_TEST_EID = "0091113658" # local background
 PWB_GLOBAL_TEST_EID = "0791631371" # staging background
 
+#*** "In Stock" Test
+#PWB_GLOBAL_TEST_EID = "2833583559" # local in-stock
+#PWB_GLOBAL_TEST_EID = "0595081569" # staging in-stock
+
 #*** Product Headline Font Family Test
 #PWB_GLOBAL_TEST_EID = "0173452456" # local product headline font family
 #PWB_GLOBAL_TEST_EID = ""  # staging product headline font family
 
-
 #*** Javascript Sections number / domian name / PID
 PWB_GLOBAL_TEST_JS_COUNT = 0
 PWB_DOMAIN_NAME = ".petwellbeing.com"
-#PWB_GLOBAL_TEST_PID = "UA-16618505-1" # local pid
-PWB_GLOBAL_TEST_PID = "UA-981819-14" # staging pid
+#PWB_GLOBAL_TEST_PID = "UA-16618505-1" # local PID
+PWB_GLOBAL_TEST_PID = "UA-981819-14" # staging PID
