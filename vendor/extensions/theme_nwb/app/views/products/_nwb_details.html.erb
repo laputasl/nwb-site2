@@ -6,7 +6,9 @@
       Item # <%= @product.sku %><br />
       In Stock: <%= @product.stock_availability == 'in_stock' ? "Yes" : "No" %>
     </p>
+    <!-- block being tested -->
     <div class="seal"></div>
+    <!-- end of block being tested -->
   </div> 
   <div class="info">
     <%if @product.show_powerreviews%>

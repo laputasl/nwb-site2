@@ -33,8 +33,8 @@
 #container { background-color: white; }
 
 /* In Stock Test */
-.in_stock_var_1 #in_stock_sign{ color: #009900; font-size:15px; font-weight: bold; font-family: Tahoma; }
 .in_stock_var_1 #in_stock_boolean{ display: none; }
+.in_stock_var_1 #in_stock_sign{ color: #009900; font-size:15px; font-weight: bold; font-family: Tahoma; }
 .in_stock_var_2 #in_stock_sign{ color: #009900; font-size:15px; font-weight: bold; font-family: Tahoma; }
 
 /* Product Headline Font Family Test */
