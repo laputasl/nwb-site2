@@ -25,7 +25,7 @@ products.each do |prod|
   row << product_image_url(prod)
   row << number_to_currency(prod.master.volume_price(1).to_s)
   row << category_names(prod, store).join("<")
-  row << (prod.count_on_hand>0)?1:0
+  row << (prod.stock_availability == 'in_stock')?1:0
   row << prod.sku
   row << prod.sku
   row << "http://#{request.host_with_port}/add_to_cart?variants[#{prod.master.id}]=1"

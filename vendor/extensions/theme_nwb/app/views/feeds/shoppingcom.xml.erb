@@ -15,7 +15,7 @@
     <Category_Name><%= cse.parent.name%></Category_Name>
     <Sub-category_Name><%= cse.name%></Sub-category_Name>
     <%end%>
-    <Product_Description><%=truncate(html_to_text(prod.description), 10000)%></Product_Description>
+    <Product_Description><%=truncate(html_to_text(prod.description), 4000)%></Product_Description>
 
     <Image_URL><%=large_image_url(prod)%></Image_URL>
     <%

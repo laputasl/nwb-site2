@@ -34,21 +34,21 @@ class SiteExtension < Spree::Extension
         @countries = Country.find(:all).sort
       end
     end
-    
+
     Admin::ReportsController.class_eval do
       # def quarters end_date=Time.now, qtrs=1
       #   qtrs = 1 if qtrs<1
       #   mnths = qtrs.to_i * 3
       #   [mnths.months.ago(end_date).beginning_of_quarter, end_date.end_of_quarter]
       # end
-      
+
       def group_by_ship_country_and_state orders
         grouped = {}
         orders.each do |order|
           addr = order.bill_address
           country = addr.country.iso
           state = addr.state_name.blank? ? addr.state.abbr : addr.state_name
-          
+
           grouped[country] ||= {}
           grouped[country][state] ||= {
             :item_total   => 0,
@@ -58,25 +58,25 @@ class SiteExtension < Spree::Extension
             :sales_total  => 0,
             :orders       => 0
           }
-          
-          grouped[country][state][:item_total]   += order.item_total   
-          grouped[country][state][:charge_total] += order.charge_total 
-          grouped[country][state][:credit_total] += order.credit_total 
-          grouped[country][state][:tax_total]    += order.tax_total    
-          grouped[country][state][:sales_total]  += order.total  
+
+          grouped[country][state][:item_total]   += order.item_total
+          grouped[country][state][:charge_total] += order.charge_total
+          grouped[country][state][:credit_total] += order.credit_total
+          grouped[country][state][:tax_total]    += order.tax_total
+          grouped[country][state][:sales_total]  += order.total
           grouped[country][state][:orders]       += 1
         end
         grouped
       end
-      
+
       def country_sales_by_quarter
         params[:search] = {} unless params[:search]
 
         # We'll look at the orders by quarter, looking at the last quarter by default
         params[:search][:created_at_after] = Time.zone.parse(params[:search][:created_at_after]).beginning_of_quarter rescue 3.months.ago(Time.zone.now).beginning_of_quarter
         params[:search][:created_at_before] = Time.zone.parse(params[:search][:created_at_before]).end_of_quarter rescue 3.months.ago(Time.zone.now).end_of_quarter
-        params[:search][:bill_address_country_iso_eq] ||= "CA" 
-        
+        params[:search][:bill_address_country_iso_eq] ||= "CA"
+
         @search = Order.searchlogic(params[:search])
         @search.checkout_complete = true
         @groups = group_by_ship_country_and_state(@search.find(:all))
@@ -154,19 +154,7 @@ class SiteExtension < Spree::Extension
       belongs_to :store
 
       named_scope :by_store, lambda { |*args| { :conditions => ["products.store_id = ?", args.first] } }
-=begin
-      xapit do |index|
-        index.text :name, :weight => 10
-        index.text :description, :subtitle_main, :sales_copy, :short_home, :ingredients
-        index.text :sku
-        index.field :is_active, :taxon_ids
-        index.facet :gender_property, "Gender"
-        index.facet :brand_property, "Brand"
-        index.facet :price_range, "Price"
-        index.facet :taxon_names, "Taxon"
-        index.sortable :price
-      end
-=end
+
       def powerreviews_page_id
         legacy_id || "#{store.code}_#{id}"
       end
