@@ -1,6 +1,5 @@
-<% order = Order.find_or_create_by_id(session[:order_id]) unless session[:order_id].blank? %>
 <div id="cartPreview">
-  <h3><%= link_to "Shopping Cart", cart_path %></h3>
+  <h3><%= link_to "Shopping Cart", (page_will_be_cached? ? new_order_url : cart_path) %></h3>
   <table summary="My Shopping Cart" cellspacing="0">
     <tbody>
       <% unless order.nil? || order.line_items.empty? -%>

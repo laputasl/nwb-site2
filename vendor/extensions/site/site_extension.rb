@@ -1261,6 +1261,31 @@ class SiteExtension < Spree::Extension
 
     end
 
+    # set up page caching stuff for products and taxons
+    HomePageController.send(:caches_page, :show)
+    ProductsController.send(:caches_page, :index, :show)
+    TaxonsController.send(:caches_page, :show)
+
+    Spree::BaseHelper.module_eval do
+      def order
+        @current_order ||= Order.find_or_create_by_id(session[:order_id]) unless session[:order_id].blank?
+
+        return if @current_order.nil?
+
+        if page_will_be_cached?
+          #create custom hash of required order details for cookie
+          details = Hash.new()
+          details.merge! @current_order.attributes.reject{|k,v| ![:number,:total,:item_total].include?(k.to_sym)}
+
+          details[:line_items]      = @current_order.line_items.map { |li| {:sku => li.variant.sku, :permalink => li.variant.permalink, :price => li.price} }
+          details[:shipping_total]  = @current_order.shipping_charges.inject(0){|total,charge| total + charge.amount }.to_s
+          cookies[:order_details]   = details.to_json
+          nil
+        else
+          @current_order
+        end
+      end
+    end
  end
 
 end

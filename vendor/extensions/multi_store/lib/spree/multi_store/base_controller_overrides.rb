@@ -2,6 +2,7 @@ module Spree::MultiStore::BaseControllerOverrides
   def self.included(controller)
     controller.prepend_before_filter :set_layout, :load_global_taxons
     controller.helper :products, :taxons
+    controller.helper_method :page_will_be_cached?, :cached_pages
   end
 
 
@@ -18,7 +19,6 @@ module Spree::MultiStore::BaseControllerOverrides
   def set_layout
     @site ||= Store.find(:first, :conditions => {:code => request.headers['wellbeing-site']})
     @current_domain = request.headers['wellbeing-domain']
-    # self.class.layout @current_domain
   end
 
   def get_taxonomies
@@ -30,4 +30,22 @@ module Spree::MultiStore::BaseControllerOverrides
     @categories = Taxonomy.find(:first, :conditions => {:store_id => @site.id, :name => "Category"})
   end
 
+
+  def cached_pages
+    {
+      :home_page  => [:show],
+      :products   => [:index, :show],
+      :taxons     => [:show]
+    }
+  end
+
+  #used to decide if user specific information regarding cart should be included (or left to cookies/js to update)
+  def page_will_be_cached?
+    return false unless actions = cached_pages[@current_controller.downcase.to_sym]
+
+    if actions.include? @current_action.downcase.to_sym
+      cookies[:authenticity_token] = session[:_csrf_token]
+      true
+    end
+  end
 end
