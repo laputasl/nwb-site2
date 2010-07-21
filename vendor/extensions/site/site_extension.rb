@@ -1267,6 +1267,9 @@ class SiteExtension < Spree::Extension
     TaxonsController.send(:caches_page, :show)
 
     Spree::BaseHelper.module_eval do
+      def cart_path
+        page_will_be_cached? ? new_order_url : cart_link
+      end
       def order
         @current_order ||= Order.find_or_create_by_id(session[:order_id]) unless session[:order_id].blank?
 

@@ -45,6 +45,7 @@ module Spree::MultiStore::BaseControllerOverrides
 
     if actions.include? @current_action.downcase.to_sym
       cookies[:authenticity_token] = session[:_csrf_token]
+      cookies[:current_user_id] = current_user.try(:id)
       true
     end
   end

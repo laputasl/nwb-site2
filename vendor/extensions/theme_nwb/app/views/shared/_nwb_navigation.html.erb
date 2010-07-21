@@ -17,7 +17,7 @@
     </h2>
   <% else %>
     <ul id="miscNav">
-      <% if current_user.nil? %>
+      <% if current_user.nil? || page_will_be_cached? %>
         <li class="first"><%= link_to "Login", login_path %></li>
       <% else %>
         <li class="first"><%= link_to "Log Out", logout_path %></li>
@@ -35,7 +35,7 @@
       <li><a id="navSecure" href="/nwb/secure" title="Secure Shopping">Secure Shopping</a></li>
       <li><a id="navGuarantee" href="/nwb/guarantee" title="90-Day Money Back Guarantee">90-Day Money Back Guarantee</a></li>
       <li><%= link_to "My Shopping Cart", cart_path, {:id => "navCart"} %></li>
-      <li><%= link_to "My Account", current_user ? user_path(current_user) : login_path(), {:id => "navAccount"} %></li>
+      <li><%= link_to "My Account", (current_user && !page_will_be_cached?) ? user_path(current_user) : login_path(), {:id => "navAccount"} %></li>
     </ul>
   <% end %>
 </div>
