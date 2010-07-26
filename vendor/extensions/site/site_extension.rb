@@ -1270,6 +1270,7 @@ class SiteExtension < Spree::Extension
       def cart_path
         page_will_be_cached? ? new_order_url : cart_link
       end
+
       def order
         @current_order ||= Order.find_or_create_by_id(session[:order_id]) unless session[:order_id].blank?
 
@@ -1287,6 +1288,11 @@ class SiteExtension < Spree::Extension
         else
           @current_order
         end
+      end
+
+      def retrieve_flash
+        @analytics_page     = (cookies['flash'] ? JSON.parse(cookies['flash'])['analytics'] : flash[:analytics]) rescue nil
+        @commerce_tracking  = (cookies['flash'] ? JSON.parse(cookies['flash'])['commerce_tracking'] : flash[:commerce_tracking]) rescue nil
       end
     end
  end

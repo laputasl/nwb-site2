@@ -3,8 +3,8 @@ module Spree::MultiStore::BaseControllerOverrides
     controller.prepend_before_filter :set_layout, :load_global_taxons
     controller.helper :products, :taxons
     controller.helper_method :page_will_be_cached?, :cached_pages
+    controller.after_filter :write_flash_to_cookie
   end
-
 
   private
 
@@ -43,10 +43,26 @@ module Spree::MultiStore::BaseControllerOverrides
   def page_will_be_cached?
     return false unless actions = cached_pages[@current_controller.downcase.to_sym]
 
-    if actions.include? @current_action.downcase.to_sym
-      cookies[:authenticity_token] = session[:_csrf_token]
-      cookies[:current_user_id] = current_user.try(:id)
-      true
+    # store cookie values so they are always there
+    cookies[:authenticity_token] = session[:_csrf_token]
+    cookies[:current_user_id] = current_user.try(:id)
+
+    true if actions.include? @current_action.downcase.to_sym
+  end
+
+
+  def write_flash_to_cookie
+    cookie_flash = cookies['flash'] ? JSON.parse(cookies['flash']) : {}
+
+    flash.each do |key, value|
+      if cookie_flash[key.to_s].blank?
+        cookie_flash[key.to_s] = value
+      else
+        cookie_flash[key.to_s] << "<br/>#{value}"
+      end
     end
+
+    cookies['flash'] = cookie_flash.to_json
+    flash.clear
   end
 end

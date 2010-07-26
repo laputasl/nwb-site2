@@ -5,7 +5,7 @@
 <%= render :partial => 'shared/gwo/control', :locals => {:eid => NWB_GLOBAL_TEST_EID, :domain_name => NWB_DOMAIN_NAME} %>
 <%#= render :partial => 'shared/ga/tracking' %>
 </head>
-  
+
 <script>utmx_section('body_tag')</script>
 <body>
 <%= render :text=>"</noscript>" %>
@@ -13,14 +13,11 @@
   <div id="container">
     <%= render "/shared/nwb_navigation" %>
     <div id="main">
-      <% if flash[:notice] %>
-        <div class="flash notice"><%= flash[:notice] %></div>
-      <% end %>
-      <% if flash[:error] %>
-        <div class="flash errors"><%= flash[:error] %></div>
-      <% end %>
       <%= render 'shared/nwb_sidebar' %>
       <div id="body">
+        <div class="flash notice" style="display:none;"></div>
+        <div class="flash errors" style="display:none;"></div>
+
         <%= yield :breadcrumbs %>
         <%= yield %>
       </div>
