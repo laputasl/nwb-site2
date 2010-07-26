@@ -19,7 +19,7 @@ if(order!=null){
   preview.append('<tr><td class="right">Total</td><td><strong>$' + order.total + '</strong></td></tr>');
 }
 
-if($.cookie('current_user_id')!=null){
+if($.cookie('current_user_id')!=""){
   $("ul#miscNav a[href='/login']").html("Log Out").attr("href", "/logout");
   $("a#navAccount").attr("href", "/users/" + $.cookie('current_user_id'));
 }

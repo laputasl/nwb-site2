@@ -18,8 +18,16 @@ class StoreSweeper < ActiveRecord::Observer
   end
 
   private
-  def expire_cache_for(record)
+  def expire_cache_for(product)
     # TODO expire Taxon pages.
-    ProductsController.new.expire_page("/products/#{record.permalink}")
+    ProductsController.new.expire_page("/products/#{product.permalink}")
+
+    product.taxons.each do |taxon|
+      TaxonsController.new.expire_page("/#{taxon.permalink[0...-1]}")
+    end
+
+    unless (product.taxon_ids && [9998,3002]).empty?
+      HomePageController.new.expire_page("/index")
+    end
   end
 end
