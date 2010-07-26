@@ -110,7 +110,11 @@ Time::DATE_FORMATS[:short_date] = "%Y-%m-%d"
 
 #*** Seal Test
 #NWB_GLOBAL_TEST_EID = "2081050742" # local seal
-NWB_GLOBAL_TEST_EID = "2990546235" # staging seal
+#NWB_GLOBAL_TEST_EID = "2990546235" # staging seal
+
+#*** Seal Position Test
+#NWB_GLOBAL_TEST_EID = "1306119896" # local seal position
+NWB_GLOBAL_TEST_EID = "2984633207" # staging seal position
 
 #*** Javascript Sections number / domian name / PID
 NWB_GLOBAL_TEST_JS_COUNT = 0
