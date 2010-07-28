@@ -4,6 +4,7 @@ module Spree::MultiStore::BaseControllerOverrides
     controller.helper :products, :taxons
     controller.helper_method :page_will_be_cached?, :cached_pages
     controller.after_filter :write_flash_to_cookie
+    controller.alias_method_chain :cache_page, :site
   end
 
   private
@@ -68,6 +69,26 @@ module Spree::MultiStore::BaseControllerOverrides
     # store cookie values so they are always there
     cookies[:authenticity_token] = session[:_csrf_token] ||= ActiveSupport::SecureRandom.base64(32)
     cookies[:current_user_id] = current_user.try(:id)
+  end
+
+  #stores cached pages in multi-store aware manner
+  def cache_page_with_site(content = nil, options = nil)
+    path = case options
+      when Hash
+        url_for(options.merge(:only_path => true, :skip_relative_url_root => true, :format => params[:format]))
+      when String
+        options
+      else
+        request.path
+    end
+
+    if path == "/" || path.blank?
+      path = request.env["REQUEST_PATH"] == "/" ? "/index" : request.env["REQUEST_PATH"]
+    end
+
+    path = "/cache/#{request.host}" << path
+
+    cache_page_without_site(content, path)
   end
 
 end

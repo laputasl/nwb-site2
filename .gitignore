@@ -32,9 +32,7 @@ config/s3.yml
 public/MailFaxOrder.pdf
 public/__utm.gif
 public/google*
-public/index.html
-public/c/*
-public/products/*
+public/cache/*
 
 # compiled less
 vendor/extensions/theme_nwb/app/stylesheets/*.css
