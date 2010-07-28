@@ -29,3 +29,9 @@
     margin: 6px 12px 0px 12px;
     background-image: url('/images/green2.png');
 }
+
+/* Seal Position Test */
+.seal_in_photo{ display: block; margin-top: 6px; }
+.seal_in_sidebar{ display: none; }
+.seal_position_var_1 .seal_in_photo{ display: none; }
+.seal_position_var_1 .seal_in_sidebar{ display: block; }
