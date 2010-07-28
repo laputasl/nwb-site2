@@ -43,9 +43,7 @@ module Spree::MultiStore::BaseControllerOverrides
   def page_will_be_cached?
     return false unless actions = cached_pages[@current_controller.downcase.to_sym]
 
-    # store cookie values so they are always there
-    cookies[:authenticity_token] = session[:_csrf_token]
-    cookies[:current_user_id] = current_user.try(:id)
+    set_customizer_cookies
 
     true if actions.include? @current_action.downcase.to_sym
   end
@@ -65,4 +63,11 @@ module Spree::MultiStore::BaseControllerOverrides
     cookies['flash'] = cookie_flash.to_json
     flash.clear
   end
+
+  def set_customizer_cookies
+    # store cookie values so they are always there
+    cookies[:authenticity_token] = session[:_csrf_token] ||= ActiveSupport::SecureRandom.base64(32)
+    cookies[:current_user_id] = current_user.try(:id)
+  end
+
 end

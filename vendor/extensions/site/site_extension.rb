@@ -397,6 +397,7 @@ class SiteExtension < Spree::Extension
     OrdersController.class_eval do
       before_filter :set_analytics
       skip_before_filter :verify_authenticity_token, :only => [:add_variant_only]
+      after_filter :set_order_cookie
 
       create.before << :assign_to_store
       update.before :check_for_removed_items
@@ -510,6 +511,15 @@ class SiteExtension < Spree::Extension
         session[:order_id]    = @order.id
         session[:order_token] = @order.token
         @order
+      end
+
+      def set_order_cookie
+        details = Hash.new()
+        details.merge! @order.attributes.reject{|k,v| ![:number,:total,:item_total].include?(k.to_sym)}
+
+        details[:line_items]      = @order.line_items.map { |li| {:sku => li.variant.sku, :permalink => li.variant.permalink, :price => li.price} }
+        details[:shipping_total]  = @order.shipping_charges.inject(0){|total,charge| total + charge.amount }.to_s
+        cookies[:order_details]   = details.to_json
       end
     end
 
@@ -1176,6 +1186,7 @@ class SiteExtension < Spree::Extension
     UserSessionsController.class_eval do
       layout 'checkouts'
       before_filter :new_user, :only => [:create, :new]
+      after_filter :set_customizer_cookies
 
       private
       def new_user
@@ -1276,18 +1287,7 @@ class SiteExtension < Spree::Extension
 
         return if @current_order.nil?
 
-        if page_will_be_cached?
-          #create custom hash of required order details for cookie
-          details = Hash.new()
-          details.merge! @current_order.attributes.reject{|k,v| ![:number,:total,:item_total].include?(k.to_sym)}
-
-          details[:line_items]      = @current_order.line_items.map { |li| {:sku => li.variant.sku, :permalink => li.variant.permalink, :price => li.price} }
-          details[:shipping_total]  = @current_order.shipping_charges.inject(0){|total,charge| total + charge.amount }.to_s
-          cookies[:order_details]   = details.to_json
-          nil
-        else
-          @current_order
-        end
+        page_will_be_cached? ? nil : @current_order
       end
 
       def retrieve_flash

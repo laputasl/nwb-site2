@@ -1,5 +1,6 @@
-map.resource :home_page
+
 map.root :controller => :home_page, :action => :show
+map.customize "/customize", :controller => :home_page, :action => :customize
 
 #needed for pagination
 map.products "/products", :controller => :products, :action => :index
@@ -14,7 +15,7 @@ map.connect "/add_to_cart", :controller=> 'orders', :action=>"add_variant_only"
 map.namespace :admin do |admin|
    admin.resources :products, :member => {:additional_fields => :get}
    admin.resource  :suspicious_order_settings
-   admin.resources :reports, :only => [:index, :show], :collection => {:sales_total => :get, :country_sales_by_quarter => :get} 
+   admin.resources :reports, :only => [:index, :show], :collection => {:sales_total => :get, :country_sales_by_quarter => :get}
 end
 
 map.category_taxon '/c/*path', :controller => 'taxons', :action => 'show'
@@ -22,6 +23,6 @@ map.brand_taxon '/b/*path', :controller => 'taxons', :action => 'show'
 # map.feed '/feed/:feed.:format',  :controller => 'feeds', :action => 'show'
 # map.feed '/feed(/:store)/:feed.:format',  :controller => 'feeds', :action => 'show'
 
-map.connect '/inc/:segment', :controller => 'feeds', :action => 'includes', :conditions => { :method => :get } 
-map.connect '/feed/:feed.:format', :controller => 'feeds', :action => 'show', :conditions => { :method => :get } 
+map.connect '/inc/:segment', :controller => 'feeds', :action => 'includes', :conditions => { :method => :get }
+map.connect '/feed/:feed.:format', :controller => 'feeds', :action => 'show', :conditions => { :method => :get }
 
