@@ -7,16 +7,18 @@ function customize_page(authenticity_token, current_user_id){
   if(order!=null){
     $('div#cartPreview h3 a').attr('href', '/orders/' + order.number + '/edit');
 
-    var preview = $('div#cartPreview table tbody');
-    preview.html('');
+    if(order.line_items.length!=0){
+      var preview = $('div#cartPreview table tbody');
+      preview.html('');
 
-    $.each(order.line_items, function(i, line_item) {
-      preview.append('<tr><td class="right"><a href="/products/' + line_item.permalink + '">' +  line_item.sku.replace("+", " ")  + '</a></td><td>$' + line_item.price + '</td></tr>');
-    });
+      $.each(order.line_items, function(i, line_item) {
+        preview.append('<tr><td class="right"><a href="/products/' + line_item.permalink + '">' +  line_item.sku.replace("+", " ")  + '</a></td><td>$' + line_item.price + '</td></tr>');
+      });
 
-    preview.append('<tr><td class="right">Sub Total</td><td>$' + order.item_total + '</td></tr>');
-    preview.append('<tr><td class="right">Shipiing</td><td>$' + order.shipping_total + '</td></tr>');
-    preview.append('<tr><td class="right">Total</td><td><strong>$' + order.total + '</strong></td></tr>');
+      preview.append('<tr><td class="right">Sub Total</td><td>$' + order.item_total + '</td></tr>');
+      preview.append('<tr><td class="right">Shipiing</td><td>$' + order.shipping_total + '</td></tr>');
+      preview.append('<tr><td class="right">Total</td><td><strong>$' + order.total + '</strong></td></tr>');
+    }
   }
 
   if(current_user_id!=""){
