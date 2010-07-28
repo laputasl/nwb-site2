@@ -1186,7 +1186,6 @@ class SiteExtension < Spree::Extension
     UserSessionsController.class_eval do
       layout 'checkouts'
       before_filter :new_user, :only => [:create, :new]
-      after_filter :set_customizer_cookies
 
       private
       def new_user

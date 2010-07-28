@@ -28,7 +28,6 @@ class HomePageController < Spree::BaseController
   end
 
   def customize
-    set_customizer_cookies
     render :js => "true"
   end
 

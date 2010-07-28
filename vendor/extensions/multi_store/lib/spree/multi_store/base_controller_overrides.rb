@@ -44,8 +44,6 @@ module Spree::MultiStore::BaseControllerOverrides
   def page_will_be_cached?
     return false unless actions = cached_pages[@current_controller.downcase.to_sym]
 
-    set_customizer_cookies
-
     true if actions.include? @current_action.downcase.to_sym
   end
 
@@ -63,6 +61,8 @@ module Spree::MultiStore::BaseControllerOverrides
 
     cookies['flash'] = cookie_flash.to_json
     flash.clear
+
+    set_customizer_cookies
   end
 
   def set_customizer_cookies
