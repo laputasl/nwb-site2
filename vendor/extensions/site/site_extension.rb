@@ -1281,7 +1281,7 @@ class SiteExtension < Spree::Extension
         page_will_be_cached? ? new_order_url : cart_link
       end
 
-      def order
+      def current_order
         @current_order ||= Order.find_or_create_by_id(session[:order_id]) unless session[:order_id].blank?
 
         return if @current_order.nil?

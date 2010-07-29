@@ -2,8 +2,8 @@
   <h3><%= link_to "Shopping Cart", (page_will_be_cached? ? new_order_url : cart_path) %></h3>
   <table summary="My Shopping Cart" cellspacing="0">
     <tbody>
-      <% unless order.nil? || order.line_items.empty? -%>
-        <% order.line_items.each do |line_item| %>
+      <% unless current_order.nil? || current_order.line_items.empty? -%>
+        <% current_order.line_items.each do |line_item| %>
           <tr>
             <td class="right"><%= link_to line_item.variant.sku, product_url(line_item.variant.product) %></td>
             <td><%= number_to_currency(line_item.variant.price) %></td>
@@ -11,7 +11,7 @@
         <% end %>
         <tr>
           <td class="right">Sub Total:</td>
-          <td><%= number_to_currency(order.item_total) %></td>
+          <td><%= number_to_currency(current_order.item_total) %></td>
         </tr>
         <tr>
           <td class="right">Shipping:</td>
@@ -19,7 +19,7 @@
         </tr>
         <tr>
           <td class="right">Total:</td>
-          <td><strong id="cart_preview_total"><%= number_to_currency(order.total) %></strong></td>
+          <td><strong id="cart_preview_total"><%= number_to_currency(current_order.total) %></strong></td>
         </tr>
       <% else %>
         <tr>
@@ -29,7 +29,7 @@
     </tbody>
   </table>
   <p><a href="/pwb/shipping" title="Free Same Day Shipping at <%= number_to_currency Spree::Config.get("#{@current_domain}_free_shipping_at") %>">Free Same Day Shipping at <%= number_to_currency Spree::Config.get("#{@current_domain}_free_shipping_at") %></a></p>
-  <% unless order.nil? || @controller.controller_name == "orders" %>
+  <% unless current_order.nil? || @controller.controller_name == "orders" %>
     <h3><%= link_to "Shipping Calculator", cart_path %></h3>
     <div id="shipping_calculator">
       <p>
@@ -56,7 +56,7 @@
 <script type="text/javascript">
   jQuery(document).ready(function(){
     var country_id = <%= country_id %>;
-    var order_total = <%= order.nil? ? 0 : order.line_items.total %>;
+    var order_total = <%= current_order.nil? ? 0 : current_order.line_items.total %>;
     <% if @shipping_calculator_rates.nil? %>
       var shipping_methods = [];
     <% else %>
@@ -79,7 +79,7 @@
         opts = {country_id: $("select#calculator_country").val()}
       }
 
-      jQuery.getJSON("<%= calculate_shipping_order_url(order.nil? ? Order.new : order) %>", opts,
+      jQuery.getJSON("<%= calculate_shipping_order_url(current_order.nil? ? Order.new : current_order) %>", opts,
         function(data){
           shipping_methods = data;
           $("#calculator_available_methods").html('');
@@ -148,7 +148,7 @@
       var value = $(this).val();
       var opts = {"shipping_method": value}
 
-      jQuery.post("<%= set_shipping_method_order_checkout_url(order.nil? ? Order.new : order) %>", opts,
+      jQuery.post("<%= set_shipping_method_order_checkout_url(current_order.nil? ? Order.new : current_order) %>", opts,
         function(data){
            $.each(shipping_methods, function(i,rate){
               if(rate.id+"" == value){
