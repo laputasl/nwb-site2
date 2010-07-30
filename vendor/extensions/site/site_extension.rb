@@ -397,6 +397,9 @@ class SiteExtension < Spree::Extension
     OrdersController.class_eval do
       before_filter :set_analytics
       skip_before_filter :verify_authenticity_token, :only => [:add_variant_only]
+
+      #allow add-to-cart with empty authenticity_token (for cached pages where JS hasn't updated authenticity_token value)
+      skip_before_filter :verify_authenticity_token, :only => [:create], :if =>  Proc.new { |controller| controller.params.key?("authenticity_token") && controller.params["authenticity_token"].blank? }
       after_filter :set_order_cookie
 
       create.before << :assign_to_store
@@ -514,6 +517,11 @@ class SiteExtension < Spree::Extension
       end
 
       def set_order_cookie
+        unless @order.in_progress?
+          cookies.delete :order_details
+          return
+        end
+
         details = Hash.new()
         details.merge! @order.attributes.reject{|k,v| ![:number,:total,:item_total].include?(k.to_sym)}
 
