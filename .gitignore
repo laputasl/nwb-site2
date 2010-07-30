@@ -33,6 +33,7 @@ public/MailFaxOrder.pdf
 public/__utm.gif
 public/google*
 public/cache/*
+public/favicon.ico
 
 # compiled less
 vendor/extensions/theme_nwb/app/stylesheets/*.css
