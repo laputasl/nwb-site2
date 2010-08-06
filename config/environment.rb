@@ -144,6 +144,10 @@ NWB_GLOBAL_TEST_PID = "UA-981819-14" # staging PID
 #PWB_GLOBAL_TEST_EID = "2833583559" # local in-stock
 PWB_GLOBAL_TEST_EID = "0595081569" # staging in-stock
 
+#*** Product Headline Test
+#PWB_GLOBAL_TEST_EID = "2485823474" # local product headline
+#PWB_GLOBAL_TEST_EID = "2743444894"  # staging product headline
+
 #*** Product Headline Font Family Test
 #PWB_GLOBAL_TEST_EID = "0173452456" # local product headline font family
 #PWB_GLOBAL_TEST_EID = ""  # staging product headline font family

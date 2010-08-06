@@ -37,6 +37,10 @@
 .in_stock_var_1 #in_stock_sign{ color: #009900; font-size:15px; font-weight: bold; font-family: Tahoma; }
 .in_stock_var_2 #in_stock_sign{ color: #009900; font-size:15px; font-weight: bold; font-family: Tahoma; }
 
+/* Product Headline Test */
+.product_headline_var_1 .product h2 { font-weight: bold; }
+.product_headline_var_2 .product h2 { font-weight: bold; font-family: Tahoma; }
+
 /* Product Headline Font Family Test */
 .product_headline_font_family_var_1 .product h2 { font-family: Tahoma;}
 .product_headline_font_family_var_2 .product h2 { font-family: Verdana;}
