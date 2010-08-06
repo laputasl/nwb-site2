@@ -26,7 +26,21 @@
           Save <%= number_to_currency(savings)%>
         </p>
         <% if is_shipping_free%>
+        <!-- original code 
           <p><span class="freeshiping">and get &nbsp;<strong>free shipping</strong></span></p>
+        -->
+        <!-- block being tested -->
+          <p>
+            <span class="freeshiping">
+              <span class="original">
+                and get &nbsp;<strong>free shipping</strong>
+              </span>
+              <span class="variation">
+                Plus &nbsp;<strong>FREE Shipping</strong>
+              </span>
+            </span>
+          </p>
+        <!-- end of block being tested -->
         <%end%>
       </div>
     </div>

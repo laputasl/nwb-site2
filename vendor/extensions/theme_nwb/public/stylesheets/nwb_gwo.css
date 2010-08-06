@@ -35,3 +35,12 @@
 .seal_in_sidebar{ display: none; }
 .seal_position_var_1 .seal_in_photo{ display: none; }
 .seal_position_var_1 .seal_in_sidebar{ display: block; }
+
+/* "FREE Shipping" Text Test */
+.freeshiping .variation { display: none; }
+.free_shipping_text_var_1 .freeshiping .original { display: none; }
+.free_shipping_text_var_1 .freeshiping .variation { display: block; }
+.free_shipping_text_var_1 .freeshiping .variation strong { color: #FF0000; }
+.free_shipping_text_var_2 .freeshiping .original { display: none; }
+.free_shipping_text_var_2 .freeshiping .variation { display: block; }
+.free_shipping_text_var_2 .freeshiping .variation strong { color: #FF0000; font-size: 14px; }

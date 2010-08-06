@@ -116,6 +116,10 @@ Time::DATE_FORMATS[:short_date] = "%Y-%m-%d"
 #NWB_GLOBAL_TEST_EID = "1306119896" # local seal position
 NWB_GLOBAL_TEST_EID = "2984633207" # staging seal position
 
+#*** "FREE Shipping" Text Test
+#NWB_GLOBAL_TEST_EID = "3509091458" # local "FREE Shipping" text
+#NWB_GLOBAL_TEST_EID = "2466158139" # staging "FREE Shipping" text
+
 #*** Javascript Sections number / domian name / PID
 NWB_GLOBAL_TEST_JS_COUNT = 0
 NWB_DOMAIN_NAME = ".naturalwellbeing.com"
