@@ -590,7 +590,7 @@ class SiteExtension < Spree::Extension
         #SITE SPECIFIC: only retrieve products for the current store - but not if we're searching
         @product_group.add_scope('by_store', @site.id) if @keywords.blank?
 
-        #Add workaround to disable paging for all products pahe
+        #Add workaround to disable paging for all products page
         per_page = 9999 if @current_controller == "products" && @current_action == "index" && @keywords.blank?
 
         @product_group.add_scope('taxons_id_eq', @taxon) unless @taxon.blank?
@@ -603,7 +603,7 @@ class SiteExtension < Spree::Extension
 
         @products_scope = @product_group.apply_on(base_scope)
 
-        curr_page = Spree::Config.searcher.manage_pagination ? params[:page] : 1
+        curr_page = params.key?(:page) ? params[:page] : 1
 
         @products = @products_scope.uniq.paginate({
             :per_page => per_page,
@@ -1155,8 +1155,9 @@ class SiteExtension < Spree::Extension
         if params.key? "id"
           @object ||= end_of_association_chain.find_by_permalink(params[:id].join("/") + "/")
         else
-          permalink = request.path[1..-1]
-          permalink += "/" unless permalink[-1..-1] == "/"
+          params[:page] = params[:path].pop if params[:path].last.to_s =~ /\A\d+\z/ # remove page number from path, and populate correct param
+          permalink = "#{params[:taxonomy]}/#{params[:path].join('/')}/"
+
           params[:id] = permalink #set params[:id] so reject_unknown_object works as expected.
 
           @object ||= end_of_association_chain.find(:first, :include => :taxonomy, :conditions => ["taxons.permalink = ? AND taxonomies.store_id = ?", permalink  , @site.id])

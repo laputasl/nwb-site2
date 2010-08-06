@@ -18,8 +18,8 @@ map.namespace :admin do |admin|
    admin.resources :reports, :only => [:index, :show], :collection => {:sales_total => :get, :country_sales_by_quarter => :get}
 end
 
-map.category_taxon '/c/*path', :controller => 'taxons', :action => 'show'
-map.brand_taxon '/b/*path', :controller => 'taxons', :action => 'show'
+map.category_taxon '/c/*path/:page', :controller => 'taxons', :action => 'show', :page => 1, :taxonomy => 'c'
+map.brand_taxon '/b/*path/:page', :controller => 'taxons', :action => 'show', :page => 1, :taxonomy => 'b'
 # map.feed '/feed/:feed.:format',  :controller => 'feeds', :action => 'show'
 # map.feed '/feed(/:store)/:feed.:format',  :controller => 'feeds', :action => 'show'
 
