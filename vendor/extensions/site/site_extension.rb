@@ -656,6 +656,7 @@ class SiteExtension < Spree::Extension
 
       update.before :clear_payments_if_in_payment_state, :correct_state_values
 
+      before_filter :ensure_valid_shipping_address
       before_filter :update_shipping_method, :only => [:paypal_payment]
       before_filter :set_analytics
       before_filter :get_exact_target_lists, :only => [:edit]
@@ -865,6 +866,18 @@ class SiteExtension < Spree::Extension
           end
         end
       end
+
+      def ensure_valid_shipping_address
+        return unless params["step"] == "delivery"
+        load_object
+
+        unless @checkout.ship_address.valid?
+          flash[:error] = "Please update your shipping address as it has been cleared due to shipping charge calculations."
+          redirect_to edit_order_checkout_url(@order, :step => "address")
+          return false
+        end
+      end
+
     end
 
     Spree::ExactTarget.module_eval do
