@@ -114,11 +114,11 @@ Time::DATE_FORMATS[:short_date] = "%Y-%m-%d"
 
 #*** Seal Position Test
 #NWB_GLOBAL_TEST_EID = "1306119896" # local seal position
-NWB_GLOBAL_TEST_EID = "2984633207" # staging seal position
+#NWB_GLOBAL_TEST_EID = "2984633207" # staging seal position
 
 #*** "FREE Shipping" Text Test
 #NWB_GLOBAL_TEST_EID = "3509091458" # local "FREE Shipping" text
-#NWB_GLOBAL_TEST_EID = "2466158139" # staging "FREE Shipping" text
+NWB_GLOBAL_TEST_EID = "2466158139" # staging "FREE Shipping" text
 
 #*** Javascript Sections number / domian name / PID
 NWB_GLOBAL_TEST_JS_COUNT = 0
@@ -142,11 +142,11 @@ NWB_GLOBAL_TEST_PID = "UA-981819-14" # staging PID
 
 #*** "In Stock" Test
 #PWB_GLOBAL_TEST_EID = "2833583559" # local in-stock
-PWB_GLOBAL_TEST_EID = "0595081569" # staging in-stock
+#PWB_GLOBAL_TEST_EID = "0595081569" # staging in-stock
 
 #*** Product Headline Test
 #PWB_GLOBAL_TEST_EID = "2485823474" # local product headline
-#PWB_GLOBAL_TEST_EID = "2743444894"  # staging product headline
+PWB_GLOBAL_TEST_EID = "2743444894"  # staging product headline
 
 #*** Product Headline Font Family Test
 #PWB_GLOBAL_TEST_EID = "0173452456" # local product headline font family
