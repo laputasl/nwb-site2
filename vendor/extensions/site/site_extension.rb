@@ -799,6 +799,8 @@ class SiteExtension < Spree::Extension
       end
 
       def update_shipping_method
+        return unless params.key?(:shipping_method)
+
         load_object
         object.enable_validation_group(:register)
 

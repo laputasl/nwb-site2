@@ -1,4 +1,4 @@
-<a id="ppx_payment" href="<%= paypal_payment_order_checkout_url @order, :payment_method_id => payment_method %>" style="text-align: center;">
+<a id="ppx_payment" href="<%= paypal_payment_order_checkout_url @order, :payment_method_id => payment_method, :shipping_method => (@order.checkout.shipping_method ? @order.checkout.shipping_method : @order.checkout.shipping_methods.first) %>" style="text-align: center;">
   <img src="/<%=@current_domain%>/images/btn-submit-paypal.gif" style="margin-left:125px;"/>
 </a>
 
