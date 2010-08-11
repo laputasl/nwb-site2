@@ -4,7 +4,11 @@
     <%= product_image(@product, {:style => "max-width:140px;margin-top:20px;"}) %>
     <p class="itemNum">
       Item # <%= @product.sku %><br />
-      In Stock: <%= @product.has_stock? ? "Yes" : "No" %>
+      <% if @product.has_stock? %>
+        <span id="in_stock_sign">In Stock</span>
+      <% else %>
+        In Stock: No
+      <% end %>
     </p>
   </div>
   <div class="info">

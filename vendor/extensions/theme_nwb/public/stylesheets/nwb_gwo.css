@@ -44,3 +44,12 @@
 .free_shipping_text_var_2 .freeshiping .original { display: none; }
 .free_shipping_text_var_2 .freeshiping .variation { display: block; }
 .free_shipping_text_var_2 .freeshiping .variation strong { color: #FF0000; font-size: 12px; }
+
+/* Guarantee Test */
+.days365 {display: none;}
+.guarantee_var_1 .days90 { display: none; }
+.guarantee_var_1 .days365 { display: inline; }
+
+.nwb-homepage-footer_var_1 { display: none; }
+.guarantee_var_1 .nwb-homepage-footer_original { display: none; }
+.guarantee_var_1 .nwb-homepage-footer_var_1 { display: block; }

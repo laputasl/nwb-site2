@@ -33,7 +33,17 @@
       <li><a id="navHome" href="/" title="Home">Home</a></li>
       <li><a id="navShipping" href="/nwb/shipping" title="Free Same Day Shipping">Free Same Day Shipping</a></li>
       <li><a id="navSecure" href="/nwb/secure" title="Secure Shopping">Secure Shopping</a></li>
+      <!-- block being tested -->
+      <!-- original code
       <li><a id="navGuarantee" href="/nwb/guarantee" title="90-Day Money Back Guarantee">90-Day Money Back Guarantee</a></li>
+      -->
+      <li>
+        <a id="navGuarantee" href="/nwb/guarantee" title="90-Day Money Back Guarantee">
+          <span class="days90" >90</span>
+          <span class="days365">365</span>-Day Money Back Guarantee
+        </a>
+      </li>
+      <!-- end of block being tested -->
       <li><%= link_to "My Shopping Cart", cart_path, {:id => "navCart"} %></li>
       <li><%= link_to "My Account", (current_user && !page_will_be_cached?) ? user_path(current_user) : login_path(), {:id => "navAccount"} %></li>
     </ul>
