@@ -12,7 +12,6 @@ CSV.generate_row([
   "category", 
   "in_stock", 
   "manufacturer_id", 
-  "upc", 
   "add_to_cart_link"], 12, buf, "\t")
 
 products.each do |prod|
@@ -26,7 +25,6 @@ products.each do |prod|
   row << number_to_currency(prod.master.volume_price(1).to_s)
   row << category_names(prod, store).join("<")
   row << (prod.stock_availability == 'in_stock')?1:0
-  row << prod.sku
   row << prod.sku
   row << "http://#{request.host_with_port}/add_to_cart?variants[#{prod.master.id}]=1"
   CSV.generate_row(row, 12, buf, "\t")
