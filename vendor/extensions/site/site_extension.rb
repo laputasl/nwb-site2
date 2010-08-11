@@ -625,7 +625,7 @@ class SiteExtension < Spree::Extension
             flash[:notice] = t(:user_created_successfully) unless session[:return_to]
             @user.roles << Role.find_by_name("admin") unless admin_created?
             respond_to do |format|
-              format.html { redirect_back_or_default products_url }
+              format.html { redirect_back_or_default root_url }
               format.js { render :js => true.to_json }
             end
           else
@@ -1211,6 +1211,72 @@ class SiteExtension < Spree::Extension
       layout 'checkouts'
       before_filter :new_user, :only => [:create, :new]
 
+      # Override to just change redirect to root_url (opposed to products url)
+      def destroy
+        current_user_session.destroy
+        session.clear
+        self.notice = t("logged_out")
+        redirect_to root_url
+      end
+
+      # Override to just change redirect to root_url (opposed to products url)
+      def create_user_session(data)
+        @user_session = UserSession.new(data)
+        @user_session.save do |result|
+          if result
+            # Should restore last uncompleted order and add current(guest) order to it, if exists.
+            order = @user_session.record.orders.last(:conditions => {:completed_at => nil})
+            if order
+              if (session[:order_token] && guest_order = Order.find(:first, :conditions => {:token => session[:order_token], :user_id => nil, :completed_at => nil}))
+                guest_order.line_items.each do |line_item|
+                  order.add_variant(line_item.variant, line_item.quantity)
+                end
+                order.save
+                session[:return_to].gsub!(guest_order.number, order.number) if session[:return_to]
+                guest_order.destroy
+              end
+              session[:order_token] = order.token
+              session[:order_id] = order.id
+            end
+
+            respond_to do |format|
+              format.html {
+                self.notice = t("logged_in_succesfully") unless session[:return_to]
+                redirect_back_or_default root_url
+              }
+              format.js {
+                user = @user_session.record
+                render :json => {:ship_address => user.ship_address, :bill_address => user.bill_address}.to_json
+              }
+            end
+          else
+            respond_to do |format|
+              format.html {
+                flash.now[:error] = t("login_failed")
+                render :action => :new
+              }
+              format.js { render :json => false }
+            end
+          end
+        end
+        redirect_back_or_default(root_url) unless performed?
+      end
+
+      # Override to just change redirect to root_url (opposed to products url)
+      def create_user(data)
+        @user = User.new(data)
+
+        @user.save do |result|
+          if result
+            self.notice = t(:user_created_successfully) unless session[:return_to]
+            redirect_back_or_default root_url
+          else
+            self.notice = t(:missing_required_information)
+            redirect_to :controller => :users, :action => :new, :user => {:openid_identifier => @user.openid_identifier}
+          end
+        end
+      end
+
       private
       def new_user
         @user = User.new
@@ -1297,7 +1363,10 @@ class SiteExtension < Spree::Extension
 
     # set up page caching stuff for products and taxons
     HomePageController.send(:caches_page, :show)
-    ProductsController.send(:caches_page, :index, :show)
+
+    # disable products controller index.
+    #ProductsController.send(:caches_page, :index, :show)
+    ProductsController.send(:caches_page, :show)
     TaxonsController.send(:caches_page, :show)
 
     Spree::BaseHelper.module_eval do
