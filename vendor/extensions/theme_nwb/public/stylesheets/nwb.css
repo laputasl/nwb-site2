@@ -1,3 +1,13 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  background-color: #fffff1;
+}
+#container {
+  width: 745px;
+  margin: 0 auto;
+  background-color: white;
+}
 * {
   margin: 0;
   padding: 0;
@@ -5,7 +15,6 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
-  background-color: #FFFFF1; /* Ivory */
 }
 hr { display: none; }
 img, fieldset { border: none; }
@@ -22,7 +31,6 @@ a:active { color: #1c3c80; }
 #container {
   width: 745px;
   margin: 0 auto;
-  background-color: white;
 }
 #header {
   width: 745px;

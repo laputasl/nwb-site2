@@ -1,55 +1,44 @@
-/* Product Headline Color Test */
 .gwo_color_test_var_1 .product h2 { color: #0000ff; }
 .gwo_color_test_var_2 .product h2 { color: #00008b; }
 .gwo_color_test_var_3 .product h2 { color: #0000cd; }
 .gwo_color_test_var_4 .product h2 { color: #000080; }
 .gwo_color_test_var_5 .product h2 { color: #4169e1; }
-
-/* Banners test */
 .original_banner { display: block; }
 .free_shipping_banner { display: none; }
-
-/* Background Test */
-.gwo_background_test_var_1 { background-color: #FFFFF1; /*Ivory*/}
-.gwo_background_test_var_2 { background-color: #EEEEFC; /*Lavender*/}
-.gwo_background_test_var_3 { background-color: #F4FFFF; /*Azure*/}
-.gwo_background_test_var_4 { background-color: #F1F8FF; /*Alice Blue*/}
+.gwo_background_test_var_1 { background-color: #fffff1; }
+.gwo_background_test_var_2 { background-color: #eeeefc; }
+.gwo_background_test_var_3 { background-color: #f4ffff; }
+.gwo_background_test_var_4 { background-color: #f1f8ff; }
 #container { background-color: white; }
-
-/* Seals Test */
-.gwo_seal_test_var_1 .seal{
-    width: 136px;
-    height: 113px;
-    margin: 6px 12px 0px 12px;
-    background-image: url('/images/green1.png');
+.gwo_seal_test_var_1 .seal {
+  width: 136px;
+  height: 113px;
+  margin: 6px 12px 0px 12px;
+  background-image: url('/images/green1.png');
 }
-.gwo_seal_test_var_2 .seal{
-    width: 136px;
-    height: 113px;
-    margin: 6px 12px 0px 12px;
-    background-image: url('/images/green2.png');
+.gwo_seal_test_var_2 .seal {
+  width: 136px;
+  height: 113px;
+  margin: 6px 12px 0px 12px;
+  background-image: url('/images/green2.png');
 }
-
-/* Seal Position Test */
-.seal_in_photo{ display: block; margin-top: 6px; }
-.seal_in_sidebar{ display: none; }
-.seal_position_var_1 .seal_in_photo{ display: none; }
-.seal_position_var_1 .seal_in_sidebar{ display: block; }
-
-/* "FREE Shipping" Text Test */
+.seal_in_photo {
+  display: block;
+  margin-top: 6px;
+}
+.seal_in_sidebar { display: none; }
+.seal_position_var_1 .seal_in_photo { display: none; }
+.seal_position_var_1 .seal_in_sidebar { display: block; }
 .freeshiping .variation { display: none; }
 .free_shipping_text_var_1 .freeshiping .original { display: none; }
 .free_shipping_text_var_1 .freeshiping .variation { display: block; }
-.free_shipping_text_var_1 .freeshiping .variation strong { color: #FF0000; }
+.free_shipping_text_var_1 .freeshiping .variation strong { color: #ff0000; }
 .free_shipping_text_var_2 .freeshiping .original { display: none; }
 .free_shipping_text_var_2 .freeshiping .variation { display: block; }
-.free_shipping_text_var_2 .freeshiping .variation strong { color: #FF0000; font-size: 12px; }
-
-/* Guarantee Test */
-.days365 {display: none;}
+.free_shipping_text_var_2 .freeshiping .variation strong {
+  color: #ff0000;
+  font-size: 12px;
+}
+.days365 { display: none; }
 .guarantee_var_1 .days90 { display: none; }
 .guarantee_var_1 .days365 { display: inline; }
-
-.nwb-homepage-footer_var_1 { display: none; }
-.guarantee_var_1 .nwb-homepage-footer_original { display: none; }
-.guarantee_var_1 .nwb-homepage-footer_var_1 { display: block; }

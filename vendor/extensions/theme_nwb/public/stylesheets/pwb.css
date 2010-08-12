@@ -394,6 +394,12 @@ h1 {
   clear: both;
 }
 .product .subtitle { font-size: 1.2em; }
+.product #in_stock_sign {
+  color: #009900;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: Tahoma;
+}
 .rateShare {
   width: 565px;
   overflow: hidden;
@@ -1307,10 +1313,4 @@ div#checkout .progress-steps {
   padding: 4px 0;
   border: 1px solid #7fadce;
   width: 150px;
-}
-#in_stock_sign {
-    color: #009900;
-    font-size:15px;
-    font-weight: bold;
-    font-family: Tahoma;
 }
