@@ -82,6 +82,7 @@
   text-align: center;
   width: 125px;
 }
+.searchprod img { max-width: 125px; }
 .sli_block_border {
   border-bottom: 1px dashed #a7b79a;
   clear: both;
