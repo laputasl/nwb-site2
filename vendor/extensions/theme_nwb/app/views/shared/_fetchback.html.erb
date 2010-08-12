@@ -1,0 +1,23 @@
+<% 
+code ||= @site.code 
+unless (fb_code = Spree::Config["#{code}_fetch_back_code"]).nil? 
+  query = {:sid => fb_code, :cat=>""}
+  unless product.nil?
+    query[:browse_products] = product.powerreviews_page_id    
+  end
+  unless order.nil?
+    order_key = @commerce_tracking.nil?  ? :abandon_products : :purchase_products
+    query[order_key] = order.line_items.map{|itm| itm.product.powerreviews_page_id}
+    query[:oid] = order.number
+  end
+  query[:name] = @commerce_tracking.nil? ? "landing" : "success"
+  query = query.to_a.map{ |k,v| [v].flatten.compact.map{ |i| "#{CGI.escape(k.to_s)}=#{CGI.escape(i.to_s)}"} }.flatten.join("&")
+  src = "http#{'s' if request.ssl?}://pixel.fetchback.com/serve/fb/pdc?#{query}"
+%><iframe src="<%=src%>" scrolling='no' width='1' height='1' marginheight='0' marginwidth='0' frameborder='0'></iframe>
+<h1><%=src%></h1>
+<h1>=<%=@commerce_tracking.nil?%>=</h1>
+<h1>=<%=flash[:commerce_tracking].nil?%>=</h1>
+<h1>=<%=JSON.parse(cookies['flash'])['commerce_tracking']%>=</h1>
+<%
+end
+%>
