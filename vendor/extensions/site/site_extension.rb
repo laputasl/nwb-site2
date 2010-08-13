@@ -395,7 +395,7 @@ class SiteExtension < Spree::Extension
     end
 
     OrdersController.class_eval do
-      before_filter :set_analytics
+      before_filter :set_analytics, :retrieve_commerce_tracking
       skip_before_filter :verify_authenticity_token, :only => [:add_variant_only]
 
       #allow add-to-cart with empty authenticity_token (for cached pages where JS hasn't updated authenticity_token value)
@@ -1382,10 +1382,6 @@ class SiteExtension < Spree::Extension
         page_will_be_cached? ? nil : @current_order
       end
 
-      def retrieve_flash
-        @analytics_page     = (cookies['flash'] ? JSON.parse(cookies['flash'])['analytics'] : flash[:analytics]) rescue nil
-        @commerce_tracking  = (cookies['flash'] ? JSON.parse(cookies['flash'])['commerce_tracking'] : flash[:commerce_tracking]) rescue nil
-      end
     end
  end
 

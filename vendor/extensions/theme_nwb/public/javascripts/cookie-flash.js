@@ -10,6 +10,7 @@ $(function() {
       $('div.flash.error').html(flash.error.replace(/\+/g," ")).show();
     }
 
-    $.cookie('flash', null);
+    //set it empty json object
+    $.cookie('flash', '{}', { path: '/' });
   }
 });

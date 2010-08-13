@@ -9,13 +9,9 @@
     <hr />
     <div id="checkout-main">
       <div class="content">
+        <div class="flash notice" style="display:none;"></div>
+        <div class="flash errors" style="display:none;"></div>
 
-        <% if flash[:notice] %>
-        <div class="flash notice"><%= flash[:notice] %></div>
-        <% end %>
-        <% if flash[:error] %>
-        <div class="flash errors"><%= flash[:error] %></div>
-        <% end %>
         <%= yield %>
 
       </div>
