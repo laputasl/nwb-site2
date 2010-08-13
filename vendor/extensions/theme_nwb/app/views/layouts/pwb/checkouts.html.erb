@@ -9,13 +9,9 @@
     <hr />
     <div id="checkout-main">
       <div class="content">
+        <div class="flash notice" style="display:none;"></div>
+        <div class="flash errors" style="display:none;"></div>
 
-        <% if flash[:notice] %>
-        <div class="flash notice"><%= flash[:notice] %></div>
-        <% end %>
-        <% if flash[:error] %>
-        <div class="flash errors"><%= flash[:error] %></div>
-        <% end %>
         <%= yield %>
 
       </div>
@@ -31,7 +27,7 @@
     :chat_window_definition => "6494358942194240032",
     :invitation_definition  => "385167419688132247"
   } %>
-  <%= render 'shared/pwb_fetch_back' %>
+  <%= yield :analytics %>
 
 </body>
 </html>

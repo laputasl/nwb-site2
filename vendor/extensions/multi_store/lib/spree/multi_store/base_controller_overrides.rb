@@ -65,6 +65,12 @@ module Spree::MultiStore::BaseControllerOverrides
     set_customizer_cookies
   end
 
+  # retrieve commerce tracking flash from cookie
+  def retrieve_commerce_tracking
+    @commerce_tracking  = (cookies['flash'] ? JSON.parse(cookies['flash'])['commerce_tracking'] : flash[:commerce_tracking]) rescue nil
+    cookies['flash'].delete('commerce_tracking') if @commerce_tracking
+  end
+
   def set_customizer_cookies
     # store cookie values so they are always there
     cookies[:authenticity_token] = session[:_csrf_token] ||= ActiveSupport::SecureRandom.base64(32)

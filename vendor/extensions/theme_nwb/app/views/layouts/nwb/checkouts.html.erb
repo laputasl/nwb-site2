@@ -9,13 +9,9 @@
     <hr />
     <div id="checkout-main">
       <div class="content">
+        <div class="flash notice" style="display:none;"></div>
+        <div class="flash errors" style="display:none;"></div>
 
-        <% if flash[:notice] %>
-        <div class="flash notice"><%= flash[:notice] %></div>
-        <% end %>
-        <% if flash[:error] %>
-        <div class="flash errors"><%= flash[:error] %></div>
-        <% end %>
         <%= yield %>
 
       </div>
@@ -26,14 +22,15 @@
   </div>
   <%= render 'shared/google_analytics' %>
   <%= render 'shared/ppc' %>
-  <%= render  :partial => 'shared/boldchat_visitor_tracking', 
+  <%= render  :partial => 'shared/boldchat_visitor_tracking',
               :locals => {
-                :page_viewer => "2298068183499916261", 
+                :page_viewer => "2298068183499916261",
                 :website_definition => "2454181574448868657",
                 :chat_window_definition => "2087633114552724379",
-                :invitation_definition=> "852533431736526015"     
-              } %>  
-  <%= render 'shared/nwb_fetch_back' %>
+                :invitation_definition=> "852533431736526015"
+              } %>
+<%= yield :analytics %>
+
 </body>
 </html>
 

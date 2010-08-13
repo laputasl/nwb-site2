@@ -2,5 +2,12 @@
   <%= render "shared/pwb_banner" %>
   <%= breadcrumbs(@taxon, @product) %>
 <% end %>
-
 <%= render "#{@current_domain}_details" %>
+<%content_for :analytics do %>
+  <%= render  :partial=> "/shared/fetchback", :locals => {
+    :code => @current_domain, 
+    :product => @product,
+    :order => nil, 
+    :order_complete => false
+    }%>
+<%end%>

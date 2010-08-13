@@ -53,3 +53,14 @@
   </script>
   <%= render_snippet("#{@current_domain}-conversion-javascript") %>
 <% end %>
+<%content_for :analytics do
+    unless @commerce_tracking.nil?
+  %><%= render  :partial=> "/shared/fetchback", :locals => {
+    :code => @current_domain, 
+    :product => nil,
+    :order => @order, 
+    :order_complete => true
+    }%>
+<%end
+end
+%>

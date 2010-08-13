@@ -27,7 +27,7 @@
   </div>
   <%= render 'shared/google_analytics' %>
   <%= render 'shared/ppc' %>
-  <%= render 'shared/pwb_fetch_back' %>
+  <%= yield :analytics %>
 </body>
 
 <% (1..PWB_GLOBAL_TEST_JS_COUNT.to_i).each do |i| %>

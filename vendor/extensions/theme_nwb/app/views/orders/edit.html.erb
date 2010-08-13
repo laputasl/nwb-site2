@@ -75,6 +75,13 @@
     <%= render_snippet("#{@current_domain}-cart-footer") %>
   </div>
 </div>
-
+<%content_for :analytics do%>
+  <%= render  :partial=> "/shared/fetchback", :locals => {
+    :code => @current_domain, 
+    :product => nil,
+    :order => @order, 
+    :order_complete => !@commerce_tracking.nil?
+    }%>
+<%end%>
 
 
