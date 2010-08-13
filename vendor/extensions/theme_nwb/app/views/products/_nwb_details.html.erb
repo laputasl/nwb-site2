@@ -20,6 +20,21 @@
     <%end%>
     <p class="subtitle"><%= @product.subtitle_main %></p>
     <div class="sales_copy"><%= @product.sales_copy %></div>
+
+    <!-- block being tested -->
+    <script type="text/javascript">
+      if(document.body.className=='guarantee_var_1')
+      {
+        var text = $(".sales_copy:first").html();
+        text = text.replace('90-Day', '365-Day', 'gm');
+        text = text.replace('90 Day', '365 Day', 'gm');
+        text = text.replace('90-day', '365-day', 'gm');
+        text = text.replace('90 day', '365 day', 'gm');
+        $(".sales_copy:first").html(text);
+      }
+    </script>
+    <!-- end of block being tested -->
+
     <%= render_snippet("nwb-ships-from-canada") if @product.taxons.exists?(:id => 9994) && country_id == 35%>
   </div>
   <div class="price">

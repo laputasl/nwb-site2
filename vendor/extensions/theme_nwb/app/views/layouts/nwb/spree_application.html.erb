@@ -35,6 +35,20 @@
   <%= render :text=>"</noscript>" %>
 <% end %>
 
+<!-- block being tested -->
+<script type="text/javascript">
+  if(document.body.className=='guarantee_var_1')
+  {
+    var text = $(".content:first").html();
+    text = text.replace('90-Day', '365-Day', 'gm');
+    text = text.replace('90 Day', '365 Day', 'gm');
+    text = text.replace('90-day', '365-day', 'gm');
+    text = text.replace('90 day', '365 day', 'gm');
+    $(".content:first").html(text);
+  }
+</script>
+<!-- end of block being tested -->
+    
 <%= render :partial => 'shared/gwo/tracking', :locals => {:eid => NWB_GLOBAL_TEST_EID, :pid => NWB_GLOBAL_TEST_PID, :domain_name => NWB_DOMAIN_NAME} %>
 </html>
 

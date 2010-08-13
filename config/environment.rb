@@ -118,11 +118,11 @@ Time::DATE_FORMATS[:short_date] = "%Y-%m-%d"
 
 #*** "FREE Shipping" Text Test
 #NWB_GLOBAL_TEST_EID = "3509091458" # local "FREE Shipping" text
-NWB_GLOBAL_TEST_EID = "2466158139" # staging "FREE Shipping" text
+#NWB_GLOBAL_TEST_EID = "2466158139" # staging "FREE Shipping" text
 
 #*** Guarantee Test
 #NWB_GLOBAL_TEST_EID = "2279164109" # local guarantee
-#NWB_GLOBAL_TEST_EID = "2397111811" # staging guarantee
+NWB_GLOBAL_TEST_EID = "2397111811" # staging guarantee
 
 #*** Javascript Sections number / domian name / PID
 NWB_GLOBAL_TEST_JS_COUNT = 0
