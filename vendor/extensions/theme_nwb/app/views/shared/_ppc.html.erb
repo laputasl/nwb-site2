@@ -3,7 +3,7 @@ prefix = (@current_domain == "nwb") ? "nwb" : "pwb"
 key = "#{prefix}_click_equations_key".to_sym
 scheme = (request.ssl?) ? "https://" : "http://"
 %><%=javascript_include_tag "#{scheme}js.clickequations.net/CLEQ_#{Spree::Config[key]}.js"%><% 
-if flash[:commerce_tracking] 
+unless @commerce_tracking.nil?
   units = 0  
   javascript_tag :defer => 'defer' do -%>
   CQtracker.set_CLEQ_transtype( '1' );
