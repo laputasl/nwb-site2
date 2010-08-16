@@ -7,7 +7,7 @@ $(function() {
     }
 
     if(flash.error!=undefined){
-      $('div.flash.error').html(flash.error.replace(/\+/g," ")).show();
+      $('div.flash.errors').html(flash.error.replace(/\+/g," ")).show();
     }
 
     //set it empty json object

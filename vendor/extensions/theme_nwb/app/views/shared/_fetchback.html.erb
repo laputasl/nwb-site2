@@ -7,13 +7,12 @@ unless (fb_code = Spree::Config["#{code}_fetch_back_code"]).nil?
   end
   unless order.nil?
     order_key = !order_complete  ? :abandon_products : :purchase_products
-    query[order_key] = order.line_items.map{|itm| itm.product.powerreviews_page_id}
+    query[order_key] = order.line_items.map{|itm| itm.product.powerreviews_page_id}.join(",")
     query[:oid] = order.number
   end
   query[:name] = !order_complete ? "landing" : "success"
   query = query.to_a.map{ |k,v| [v].flatten.compact.map{ |i| "#{CGI.escape(k.to_s)}=#{CGI.escape(i.to_s)}"} }.flatten.join("&")
   src = "http#{'s' if request.ssl?}://pixel.fetchback.com/serve/fb/pdc?#{query}"
-%><iframe src="<%=src%>" scrolling='no' width='1' height='1' marginheight='0' marginwidth='0' frameborder='0'></iframe>
-<%
+%><iframe src="<%=src%>" scrolling='no' width='1' height='1' marginheight='0' marginwidth='0' frameborder='0'></iframe><%
 end
 %>

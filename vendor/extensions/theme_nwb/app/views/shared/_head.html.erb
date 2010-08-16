@@ -1,5 +1,6 @@
 <title><%= title %></title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="shortcut icon" href="/<%=@site.code%>/images/favicon.ico" type="image/x-icon" />
 <%= stylesheet_link_tag "/stylesheets/#{@current_domain}.css" %>
 <%= stylesheet_link_tag "/stylesheets/#{@current_domain}_print.css", :media=> "print"%>
 <%= stylesheet_link_tag "/stylesheets/#{@current_domain}_gwo.css" %>
@@ -28,7 +29,7 @@
   <% end %>
 <% end %>
 <link rel="search" href="<%= Spree::Config["#{@site.code}_search_domain"]%>/opensearch.php" type="application/opensearchdescription+xml" title="<%= Spree::Config["#{@site.code}_opensearch_title"] %>"/>
-
+---
 <meta property="fb:admins" content="1238192791" />
 
 <%= yield :head %>
