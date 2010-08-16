@@ -59,6 +59,8 @@
           <td colspan="7" class="cart_total">Total (USD):</td>
           <td class="cart_total"><strong id="cart_preview_total"><%= number_to_currency @order.total %></strong></td>
         </tr>
+        <!-- block being tested -->    
+        <!-- original code
         <tr>
           <td colspan="6">
             <%= link_to image_tag("/#{@current_domain}/images/button_return_to_store.gif"), products_path %>
@@ -67,6 +69,31 @@
             <%= link_to image_tag("/#{@current_domain}/images/button_proceed_checkout.gif", :alt => t("checkout")), edit_order_checkout_url(@order), :class => 'button checkout primary' %>
           </td>
         </tr>
+        -->
+        <tr valign="bottom">
+          <td colspan="4">
+            <%= link_to image_tag("/#{@current_domain}/images/button_return_to_store.gif"), products_path %>            
+          </td>
+          <td colspan="2">
+            <% if @site.code == "pwb" %>
+              <script language="javascript" type="text/javascript">
+                //<![CDATA[
+                if(document.body.className=='comodo_position_var_1' && document.location.pathname.split('/')[1]=="orders")
+                {
+                  var tl_loc0=(window.location.protocol == "https:")? "https://secure.comodo.net/trustlogo/javascript/trustlogo.js" : "http://www.trustlogo.com/trustlogo/javascript/trustlogo.js";
+                  document.writeln('<scr' + 'ipt language="JavaScript" src="'+tl_loc0+'" type="text\/javascript">' + '<\/scr' + 'ipt>');
+                }
+                //]]>
+              </script>
+              <a href="http://www.instantssl.com" id="comodoTL">SSL</a>
+              <script type="text/javascript">TrustLogo("http://www.petwellbeing.com/pwb/images/trust_logo.gif", "SC4", "none");</script>
+            <% end %>
+          </td>
+          <td colspan="2">
+            <%= link_to image_tag("/#{@current_domain}/images/button_proceed_checkout.gif", :alt => t("checkout")), edit_order_checkout_url(@order), :class => 'button checkout primary' %>
+          </td>
+        </tr>
+        <!-- end of block being tested -->
       </tfoot>
     <% end -%>
   </table>

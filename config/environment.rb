@@ -134,7 +134,7 @@ NWB_GLOBAL_TEST_PID = "UA-981819-14" # staging PID
 #==================================PWB=========================================
 #*** Banner Test
 #PWB_GLOBAL_TEST_EID = "0640388639" # local banners
-#PWB_GLOBAL_TEST_EID = "3906587456"  # staging banners
+#PWB_GLOBAL_TEST_EID = "3906587456" # staging banners
 
 #*** Product Headline Font Size Test
 #PWB_GLOBAL_TEST_EID = "0470403630" # local product headline font size
@@ -150,7 +150,11 @@ NWB_GLOBAL_TEST_PID = "UA-981819-14" # staging PID
 
 #*** Product Headline Test
 #PWB_GLOBAL_TEST_EID = "2485823474" # local product headline
-PWB_GLOBAL_TEST_EID = "2743444894"  # staging product headline
+#PWB_GLOBAL_TEST_EID = "2743444894"  # staging product headline
+
+#*** Product Comodo Position Test
+#PWB_GLOBAL_TEST_EID = "0752269438" # local comodo position
+PWB_GLOBAL_TEST_EID = "2608375276"  # staging comodo position
 
 #*** Product Headline Font Family Test
 #PWB_GLOBAL_TEST_EID = "0173452456" # local product headline font family
