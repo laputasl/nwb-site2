@@ -393,6 +393,20 @@ class SiteExtension < Spree::Extension
         order.paid? && !inventory_units.any? {|unit| unit.backordered? }
       end
     end
+    
+    PasswordResetsController.class_eval do
+       before_filter :set_analytics
+       def set_analytics
+         @analytics_page = case @current_action
+         when "new"
+           "/password_resets/request"
+         when "edit"
+           "/password_resets/edit"
+         when "update"
+           "/password_resets/update"
+         end
+       end
+    end
 
     OrdersController.class_eval do
       before_filter :set_analytics, :retrieve_commerce_tracking
