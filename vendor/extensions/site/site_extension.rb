@@ -399,7 +399,7 @@ class SiteExtension < Spree::Extension
        def set_analytics
          @analytics_page = case @current_action
          when "new"
-           "/password_resets/request"
+           "/password_resets/new"
          when "edit"
            "/password_resets/edit"
          when "update"
