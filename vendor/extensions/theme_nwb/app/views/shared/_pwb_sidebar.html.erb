@@ -48,6 +48,8 @@
   Shows the logo at URL http://www.petwellbeing.com/pwb/images/trust_logo.gif
   Logo type is ("SC4")
   //-->
+  <!-- block being tested -->
+  <!-- original code
   <script language="javascript" type="text/javascript">
   //<![CDATA[
   var tl_loc0=(window.location.protocol == "https:")? "https://secure.comodo.net/trustlogo/javascript/trustlogo.js" : "http://www.trustlogo.com/trustlogo/javascript/trustlogo.js";
@@ -56,7 +58,18 @@
   </script>
   <a href="http://www.instantssl.com" id="comodoTL">SSL</a>
   <script type="text/javascript">TrustLogo("http://www.petwellbeing.com/pwb/images/trust_logo.gif", "SC4", "none");</script>
-
+  -->
+  <script type="text/javascript">
+    if(!(document.body.className=='comodo_position_var_1' && document.location.pathname.split('/')[1]=="orders"))
+    {
+      var tl_loc0=(window.location.protocol == "https:")? "https://secure.comodo.net/trustlogo/javascript/trustlogo.js" : "http://www.trustlogo.com/trustlogo/javascript/trustlogo.js";
+      document.writeln('<scr' + 'ipt language="JavaScript" src="'+tl_loc0+'" type="text\/javascript">' + '<\/scr' + 'ipt>');
+    }
+  </script> 
+  <a href="http://www.instantssl.com" id="comodoTL">SSL</a>
+  <script type="text/javascript">TrustLogo("http://www.petwellbeing.com/pwb/images/trust_logo.gif", "SC4", "none");</script>
+  <!-- end of block being tested -->
+  
   <img src="/pwb/images/img_paypal.png" alt="PayPal" />
 </div>
 <hr />
