@@ -37,7 +37,7 @@
 
 <!-- block being tested -->
 <script type="text/javascript">
-  if(document.body.className=='guarantee_var_1')
+  if(document.body.className=='guarantee_var_1' && document.location.pathname.split('/')[1]!="products")
   {
     var text = $(".content:first").html();
     text = text.replace('90-Day', '365-Day', 'gm');
