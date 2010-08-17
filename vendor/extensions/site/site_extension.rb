@@ -407,6 +407,7 @@ class SiteExtension < Spree::Extension
          end
        end
     end
+    
 
     OrdersController.class_eval do
       before_filter :set_analytics, :retrieve_commerce_tracking
